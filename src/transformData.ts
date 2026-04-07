@@ -57,7 +57,7 @@ export function transformData(
   data: unknown,
   decodedPaths: Set<string>,
   currentPath = "",
-  settings?: SettingsPayload
+  settings?: SettingsPayload,
 ): TransformResult {
   const decodables: DecodableEntry[] = [];
 
@@ -95,7 +95,7 @@ function recursiveDecode(
   path: string,
   decodedPaths: Set<string>,
   depth = 0,
-  settings?: SettingsPayload
+  settings?: SettingsPayload,
 ): { value: unknown; type?: DecodableEntry["type"]; decodables: DecodableEntry[] } {
   const decodables: DecodableEntry[] = [];
   if (depth >= 5) return { value, decodables };
@@ -187,18 +187,18 @@ function recursiveDecode(
     autoRenderConfig = settings.markdown?.autoRender ?? true;
     mdDetector.configure(settings as unknown as Record<string, unknown>);
   }
-  
+
   // We need to pass the leaf key name to match the detector's logic
   const keyName = path.split(".").pop() || "";
   const mdResult = mdDetector.detect(value, [keyName]);
 
   if (mdResult) {
     if (depth === 0) {
-      decodables.push({ 
-        path, 
-        type: "multiline", 
-        raw: value, 
-        autoRender: autoRenderConfig && mdResult.type === "markdown" 
+      decodables.push({
+        path,
+        type: "multiline",
+        raw: value,
+        autoRender: autoRenderConfig && mdResult.type === "markdown",
       });
     }
   }
@@ -210,7 +210,7 @@ function transformValue(
   value: unknown,
   path: string,
   decodedPaths: Set<string>,
-  settings?: SettingsPayload
+  settings?: SettingsPayload,
 ): { value: unknown; decodables: DecodableEntry[] } {
   if (typeof value === "string") {
     return recursiveDecode(value, path, decodedPaths, 0, settings);

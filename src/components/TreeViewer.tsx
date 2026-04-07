@@ -24,12 +24,7 @@ const DECODE_ICONS: Record<string, { icon: string; label: string }> = {
   multiline: { icon: "📝", label: "Text" },
 };
 
-export const TreeViewer: React.FC<TreeViewerProps> = ({
-  data,
-  theme,
-  detectors,
-  settings,
-}) => {
+export const TreeViewer: React.FC<TreeViewerProps> = ({ data, theme, detectors, settings }) => {
   const treeTheme = getTreeTheme(theme);
   const containerRef = useRef<HTMLDivElement>(null);
   const [expandLevel, setExpandLevel] = useState<number | false>(2);
@@ -146,16 +141,14 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
           const decodable = decodableMap.get(pathStr);
           const isDecoded = decodedPaths.has(pathStr);
 
-          const isAutoMarkdown =
-            decodable?.type === "multiline" && decodable.autoRender === true;
+          const isAutoMarkdown = decodable?.type === "multiline" && decodable.autoRender === true;
 
           let isRendered = isDecoded;
           if (isAutoMarkdown) {
             isRendered = !isDecoded;
           }
 
-          const isDecodedMarkdown =
-            isRendered && decodable?.type === "multiline";
+          const isDecodedMarkdown = isRendered && decodable?.type === "multiline";
 
           const badgeButton = decodable && (
             <button

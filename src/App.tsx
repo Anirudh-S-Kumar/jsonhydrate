@@ -89,7 +89,12 @@ const App: React.FC = () => {
 
   return (
     <div className={`jsontree-root jsontree-${theme}`}>
-      <TreeViewer data={parsedJson} theme={theme} detectors={detectors} settings={settings ?? undefined} />
+      <TreeViewer
+        data={parsedJson}
+        theme={theme}
+        detectors={detectors}
+        settings={settings ?? undefined}
+      />
     </div>
   );
 };

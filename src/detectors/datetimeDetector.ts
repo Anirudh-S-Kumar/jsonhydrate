@@ -111,24 +111,25 @@ export class DatetimeDetector implements IValueDetector {
     // US date: MM/DD/YYYY
     if (US_DATE.test(trimmed)) {
       const parts = trimmed.split("/");
-      const d = new Date(`${parts[2]}-${parts[0].padStart(2, "0")}-${parts[1].padStart(2, "0")}T00:00:00`);
+      const d = new Date(
+        `${parts[2]}-${parts[0].padStart(2, "0")}-${parts[1].padStart(2, "0")}T00:00:00`,
+      );
       return isValidDate(d) ? d : null;
     }
 
     // EU date: DD-MM-YYYY or DD.MM.YYYY
     if (EU_DATE.test(trimmed)) {
       const parts = trimmed.split(/[.\-]/);
-      const d = new Date(`${parts[2]}-${parts[1].padStart(2, "0")}-${parts[0].padStart(2, "0")}T00:00:00`);
+      const d = new Date(
+        `${parts[2]}-${parts[1].padStart(2, "0")}-${parts[0].padStart(2, "0")}T00:00:00`,
+      );
       return isValidDate(d) ? d : null;
     }
 
     return null;
   }
 
-  private tryParseNumber(
-    value: number,
-    keyPath: (string | number)[]
-  ): Date | null {
+  private tryParseNumber(value: number, keyPath: (string | number)[]): Date | null {
     if (!Number.isFinite(value) || value < 0) return null;
 
     // Check if key name hints at this being a timestamp

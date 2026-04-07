@@ -16,9 +16,7 @@ export class MarkdownDetector implements IValueDetector {
     if (!mdConfig) return;
 
     if (Array.isArray(mdConfig.keyHints)) {
-      this.keyHints = mdConfig.keyHints.filter(
-        (k): k is string => typeof k === "string",
-      );
+      this.keyHints = mdConfig.keyHints.filter((k): k is string => typeof k === "string");
     }
     if (typeof mdConfig.enabled === "boolean") {
       this.enabled = mdConfig.enabled;
@@ -38,14 +36,11 @@ export class MarkdownDetector implements IValueDetector {
     const hasLink = /\[.+\]\(.+\)/.test(trimmed);
     const hasCodeBlock = /```/.test(trimmed);
 
-    const isMarkdownCandidate =
-      hasNewline || hasHeader || hasList || hasLink || hasCodeBlock;
+    const isMarkdownCandidate = hasNewline || hasHeader || hasList || hasLink || hasCodeBlock;
 
     // 3. Check for key hints
     const key = keyPath.length > 0 ? String(keyPath[0]).toLowerCase() : "";
-    const keyMatches = this.keyHints.some((hint) =>
-      key.includes(hint.toLowerCase()),
-    );
+    const keyMatches = this.keyHints.some((hint) => key.includes(hint.toLowerCase()));
 
     if (isMarkdownCandidate || keyMatches) {
       return {
@@ -53,9 +48,7 @@ export class MarkdownDetector implements IValueDetector {
         raw: value,
         color: "",
         className: isMarkdownCandidate ? "jsontree-markdown-candidate" : "",
-        tooltip: isMarkdownCandidate
-          ? "Click to render as Markdown"
-          : "Click to show multiline",
+        tooltip: isMarkdownCandidate ? "Click to render as Markdown" : "Click to show multiline",
       };
     }
 

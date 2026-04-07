@@ -16,5 +16,5 @@
     "types": ["node", "vitest/globals", "@testing-library/jest-dom"]
   },
   "include": ["src/**/*", "ext-src/**/*", "tests/**/*"],
-  "exclude": ["node_modules", "build", "jsoncrack.com"]
+  "exclude": ["node_modules", "build"]
 }

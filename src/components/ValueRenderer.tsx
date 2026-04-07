@@ -72,11 +72,7 @@ const CopyableValue: React.FC<{
   return (
     <span className="jsontree-value-wrapper">
       {children}
-      <button
-        className="jsontree-copy-btn"
-        onClick={handleCopy}
-        title="Copy value"
-      >
+      <button className="jsontree-copy-btn" onClick={handleCopy} title="Copy value">
         <CopyIcon />
       </button>
       {copied && <span className="jsontree-copied-toast">Copied!</span>}
@@ -92,10 +88,7 @@ const ColorPreview: React.FC<{
 }> = ({ color, valueAsString }) => (
   <CopyableValue copyText={color}>
     <span className="jsontree-color-preview">
-      <span
-        className="jsontree-color-swatch"
-        style={{ backgroundColor: color }}
-      />
+      <span className="jsontree-color-swatch" style={{ backgroundColor: color }} />
       {valueAsString}
     </span>
   </CopyableValue>
@@ -126,8 +119,7 @@ const ImagePreview: React.FC<{
 
   const hidePreview = useCallback(() => setVisible(false), []);
 
-  const fullUrl =
-    url.startsWith("http") || url.startsWith("data:") ? url : `https://${url}`;
+  const fullUrl = url.startsWith("http") || url.startsWith("data:") ? url : `https://${url}`;
 
   const handleClick = useCallback(
     (e: React.MouseEvent) => {
@@ -166,10 +158,7 @@ const ImagePreview: React.FC<{
 
 // ======================== Markdown block ========================
 
-const MarkdownBlock: React.FC<{ raw: string; normalized: string }> = ({
-  raw,
-  normalized,
-}) => {
+const MarkdownBlock: React.FC<{ raw: string; normalized: string }> = ({ raw, normalized }) => {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = useCallback(
@@ -185,16 +174,8 @@ const MarkdownBlock: React.FC<{ raw: string; normalized: string }> = ({
 
   return (
     <div className="jsontree-markdown-wrapper">
-      <button
-        className="jsontree-markdown-copy"
-        onClick={handleCopy}
-        title="Copy raw value"
-      >
-        {copied ? (
-          <span style={{ color: "#4ec9b0", fontSize: "10px" }}>✓</span>
-        ) : (
-          <CopyIcon />
-        )}
+      <button className="jsontree-markdown-copy" onClick={handleCopy} title="Copy raw value">
+        {copied ? <span style={{ color: "#4ec9b0", fontSize: "10px" }}>✓</span> : <CopyIcon />}
       </button>
       <div className="jsontree-markdown-content">
         <ReactMarkdown remarkPlugins={[remarkGfm]}>{normalized}</ReactMarkdown>
@@ -208,8 +189,7 @@ function normalizeMarkdown(value: string): string {
     .split("\n")
     .map((line, i, arr) => {
       const next = arr[i + 1];
-      if (line.trim() === "" || next === undefined || next.trim() === "")
-        return line;
+      if (line.trim() === "" || next === undefined || next.trim() === "") return line;
       if (/^(\*|#|-|>|\d+\.)/.test(next.trim())) return line;
       return line + "  ";
     })
@@ -251,11 +231,7 @@ export const ValueRenderer: React.FC<ValueRendererProps> = ({
     if (detection.type === "uuid") {
       return (
         <CopyableValue copyText={detection.raw}>
-          <UuidBadge
-            value={detection.raw}
-            color={detection.color}
-            tooltip={detection.tooltip}
-          />
+          <UuidBadge value={detection.raw} color={detection.color} tooltip={detection.tooltip} />
         </CopyableValue>
       );
     }

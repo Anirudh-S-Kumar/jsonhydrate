@@ -44,11 +44,7 @@ export const ExpandableValue: React.FC<ExpandableValueProps> = ({
       ) : (
         <span className="jsontree-expandable-collapsed">
           <span style={{ color }}>{rawDisplay}</span>
-          <button
-            className="jsontree-expandable-toggle"
-            onClick={toggle}
-            title={`Decode ${label}`}
-          >
+          <button className="jsontree-expandable-toggle" onClick={toggle} title={`Decode ${label}`}>
             {icon} {label}
           </button>
         </span>

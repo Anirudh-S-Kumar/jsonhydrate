@@ -14,7 +14,7 @@ describe("TreeViewer", () => {
     };
 
     const { getByText, queryByText, container } = render(
-      <TreeViewer data={data} theme="light" detectors={[]} />
+      <TreeViewer data={data} theme="light" detectors={[]} />,
     );
 
     // Initial render - checks default expansion levels (usually 2, so level1 is expanded, level2 is not)
@@ -29,7 +29,7 @@ describe("TreeViewer", () => {
       expect(getByText("level2_array:")).toBeInTheDocument();
       // react-json-tree wraps items, let's just make sure "Expand All" triggers re-render state
     }
-    
+
     const collapseAllButton = container.querySelector('button[title="Collapse All"]');
     if (collapseAllButton) {
       fireEvent.click(collapseAllButton);
@@ -41,15 +41,15 @@ describe("TreeViewer", () => {
   it("decodes decodable fields when badge is clicked", () => {
     const data = {
       // Small base64 encoded JSON string
-      payload: "eyJrZXkiOiAidmFsdWUifQ=="
+      payload: "eyJrZXkiOiAidmFsdWUifQ==",
     };
 
     const { container, getByText, queryByText } = render(
-      <TreeViewer data={data} theme="light" detectors={[]} />
+      <TreeViewer data={data} theme="light" detectors={[]} />,
     );
 
     // Should find the badge initially
-    const badge = container.querySelector('.jsontree-decode-badge');
+    const badge = container.querySelector(".jsontree-decode-badge");
     expect(badge).toBeInTheDocument();
     expect(badge?.textContent).toContain("B64");
 

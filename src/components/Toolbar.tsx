@@ -23,7 +23,11 @@ export const Toolbar: React.FC<ToolbarProps> = ({
       <button className="jsontree-toolbar-btn" onClick={onCollapseAll} title="Collapse all nodes">
         Collapse All
       </button>
-      <button className="jsontree-toolbar-btn" onClick={onExpandDefault} title="Reset to default depth">
+      <button
+        className="jsontree-toolbar-btn"
+        onClick={onExpandDefault}
+        title="Reset to default depth"
+      >
         Reset
       </button>
       {(onDecodeAll || onUndecodeAll) && (

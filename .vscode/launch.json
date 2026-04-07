@@ -10,9 +10,7 @@
         "${workspaceFolder}/tests/fixtures",
         "${workspaceFolder}/tests/fixtures/test-data.json"
       ],
-      "outFiles": [
-        "${workspaceFolder}/build/**/*.js"
-      ],
+      "outFiles": ["${workspaceFolder}/build/**/*.js"],
       "preLaunchTask": "npm: build:dev"
     }
   ]

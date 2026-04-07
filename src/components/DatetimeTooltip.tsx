@@ -35,11 +35,7 @@ function relativeTime(date: Date): string {
 }
 
 const CopyRowIcon = () => (
-  <svg
-    viewBox="0 0 16 16"
-    fill="currentColor"
-    style={{ width: 10, height: 10, flexShrink: 0 }}
-  >
+  <svg viewBox="0 0 16 16" fill="currentColor" style={{ width: 10, height: 10, flexShrink: 0 }}>
     <path d="M4 4h8v8H4V4zm-2-2v12h12V2H2zm1 1h10v10H3V3z" />
     <path d="M6 0H0v6h1V1h5V0z" opacity={0.5} />
   </svg>
@@ -59,15 +55,11 @@ const TooltipRow: React.FC<{
         setTimeout(() => setCopied(false), 1000);
       });
     },
-    [value]
+    [value],
   );
 
   return (
-    <div
-      className="jsontree-tooltip-row"
-      onClick={handleCopy}
-      title={`Click to copy: ${value}`}
-    >
+    <div className="jsontree-tooltip-row" onClick={handleCopy} title={`Click to copy: ${value}`}>
       <span className="jsontree-tooltip-label">{label}</span>
       <span className="jsontree-tooltip-value">
         {copied ? (
@@ -85,11 +77,7 @@ const TooltipRow: React.FC<{
   );
 };
 
-export const DatetimeTooltip: React.FC<DatetimeTooltipProps> = ({
-  value,
-  color,
-  date,
-}) => {
+export const DatetimeTooltip: React.FC<DatetimeTooltipProps> = ({ value, color, date }) => {
   const [visible, setVisible] = useState(false);
   const [position, setPosition] = useState({ top: 0, left: 0 });
   const triggerRef = useRef<HTMLSpanElement>(null);

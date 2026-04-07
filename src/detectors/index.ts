@@ -34,7 +34,7 @@ export function createDetectors(settings?: SettingsPayload): IValueDetector[] {
 export function runDetectors(
   value: unknown,
   keyPath: (string | number)[],
-  detectors: IValueDetector[]
+  detectors: IValueDetector[],
 ): DetectionResult | null {
   for (const detector of detectors) {
     if (!detector.enabled) continue;

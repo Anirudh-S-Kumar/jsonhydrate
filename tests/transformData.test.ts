@@ -5,7 +5,7 @@ describe("transformData", () => {
   it("does nothing to normal objects if no paths are decoded", () => {
     const data = { hello: "world", count: 42 };
     const result = transformData(data, new Set());
-    
+
     expect(result.data).toEqual(data);
     expect(result.decodables).toHaveLength(0);
   });
@@ -36,7 +36,7 @@ describe("transformData", () => {
 
   it("identifies and can decode multiline formatted text (markdown)", () => {
     const data = { text: "Line 1\nLine 2\nLine 3" };
-    
+
     // 1. Should identify it
     const identifyResult = transformData(data, new Set());
     expect(identifyResult.decodables).toHaveLength(1);
@@ -52,11 +52,11 @@ describe("transformData", () => {
     const bytes = new TextEncoder().encode(JSON.stringify(dataObj));
     const { gzipSync } = await import("fflate");
     const compressed = gzipSync(bytes);
-    
+
     // Polyfill buffer to base64 encoding for browsers/jsdom
     let binary = "";
     for (let i = 0; i < compressed.byteLength; i++) {
-        binary += String.fromCharCode(compressed[i]);
+      binary += String.fromCharCode(compressed[i]);
     }
     const base64 = btoa(binary);
 
@@ -79,12 +79,18 @@ describe("transformData", () => {
   it("identifies markdown by keyword even if it's on a single line", () => {
     const data = { notes: "This is some **important** content." };
     const settings = {
-        markdown: { keyHints: ["notes"] },
-        uuid: { enabled: true, color: "", additionalPatterns: [] },
-        datetime: { enabled: true, color: "", keyHints: [], unixRangeMin: 0, unixRangeMax: 4102444800 },
-        customRules: []
+      markdown: { keyHints: ["notes"] },
+      uuid: { enabled: true, color: "", additionalPatterns: [] },
+      datetime: {
+        enabled: true,
+        color: "",
+        keyHints: [],
+        unixRangeMin: 0,
+        unixRangeMax: 4102444800,
+      },
+      customRules: [],
     } as any;
-    
+
     const result = transformData(data, new Set(), "", settings);
 
     expect(result.decodables).toHaveLength(1);

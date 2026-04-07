@@ -12,7 +12,7 @@ describe("ValueRenderer", () => {
         keyPath={["key"]}
         detectors={[]}
         theme="light"
-      />
+      />,
     );
     expect(getByText("basic string")).toBeInTheDocument();
   });
@@ -27,12 +27,12 @@ describe("ValueRenderer", () => {
         detectors={[]}
         theme="light"
         forceMarkdown={true}
-      />
+      />,
     );
-    
+
     // Assert that markdown wrapper logic is rendering
     expect(container.querySelector(".jsontree-markdown-wrapper")).toBeInTheDocument();
-    
+
     // Assert that H1 tag was produced
     const h1 = container.querySelector("h1");
     expect(h1).toBeInTheDocument();
@@ -59,12 +59,12 @@ describe("ValueRenderer", () => {
         detectors={[]}
         theme="light"
         forceMarkdown={false}
-      />
+      />,
     );
-    
+
     // Raw strings should not have markdown-wrapper
     expect(container.querySelector(".jsontree-markdown-wrapper")).not.toBeInTheDocument();
-    
+
     // The entire raw string text should simply be an inline span
     expect(container.querySelector("span")?.textContent).toBe(markdownStr);
   });

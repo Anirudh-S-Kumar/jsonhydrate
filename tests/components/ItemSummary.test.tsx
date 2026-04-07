@@ -16,26 +16,20 @@ describe("ItemSummary", () => {
   });
 
   it("renders correctly for an Object", () => {
-    const { getByText } = render(
-      <ItemSummary type="Object" data={{ a: 1, b: 2 }} />
-    );
+    const { getByText } = render(<ItemSummary type="Object" data={{ a: 1, b: 2 }} />);
     expect(getByText("{} 2 keys")).toBeInTheDocument();
   });
 
   it("renders correctly for an Array", () => {
-    const { getByText } = render(
-      <ItemSummary type="Array" data={[1, 2, 3]} />
-    );
+    const { getByText } = render(<ItemSummary type="Array" data={[1, 2, 3]} />);
     expect(getByText("[] 3 items")).toBeInTheDocument();
   });
 
   it("copies JSON data to clipboard when copy button is clicked", async () => {
     navigator.clipboard.writeText = vi.fn().mockResolvedValue(undefined);
-    
+
     const data = { hello: "world" };
-    const { container, getByText } = render(
-      <ItemSummary type="Object" data={data} />
-    );
+    const { container, getByText } = render(<ItemSummary type="Object" data={data} />);
 
     const button = container.querySelector(".jsontree-copy-btn");
     expect(button).toBeInTheDocument();

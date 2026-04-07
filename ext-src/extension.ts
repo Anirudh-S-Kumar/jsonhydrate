@@ -20,15 +20,29 @@ function getSettings(): Record<string, unknown> {
       enabled: config.get<boolean>("datetime.enabled", true),
       color: config.get<string>("datetime.color", "#ffcb6b"),
       keyHints: config.get<string[]>("datetime.keyHints", [
-        "time", "date", "created", "updated", "timestamp",
-        "_at", "_on", "epoch", "expires", "modified",
+        "time",
+        "date",
+        "created",
+        "updated",
+        "timestamp",
+        "_at",
+        "_on",
+        "epoch",
+        "expires",
+        "modified",
       ]),
       unixRangeMin: config.get<number>("datetime.unixRangeMin", 0),
       unixRangeMax: config.get<number>("datetime.unixRangeMax", 4102444800),
     },
     markdown: {
       keyHints: config.get<string[]>("markdown.keyHints", [
-        "markdown", "description", "notes", "summary", "comment", "readme", "md"
+        "markdown",
+        "description",
+        "notes",
+        "summary",
+        "comment",
+        "readme",
+        "md",
       ]),
       autoRender: config.get<boolean>("markdown.autoRender", true),
     },
@@ -40,10 +54,7 @@ function getSettings(): Record<string, unknown> {
  * Given a JSON path like ["user", "name"], find the position of that key
  * in the document text and reveal it in the editor.
  */
-function navigateToJsonPath(
-  editor: vscode.TextEditor | undefined,
-  jsonPath: (string | number)[]
-) {
+function navigateToJsonPath(editor: vscode.TextEditor | undefined, jsonPath: (string | number)[]) {
   if (!editor || !jsonPath || jsonPath.length === 0) return;
 
   const document = editor.document;
@@ -76,10 +87,7 @@ function navigateToJsonPath(
       if (i === jsonPath.length - 1) {
         const pos = document.positionAt(idx);
         editor.selection = new vscode.Selection(pos, pos);
-        editor.revealRange(
-          new vscode.Range(pos, pos),
-          vscode.TextEditorRevealType.InCenter
-        );
+        editor.revealRange(new vscode.Range(pos, pos), vscode.TextEditorRevealType.InCenter);
       }
     } else if (typeof segment === "number") {
       // Array index — we need to find the Nth element after the current position.
@@ -116,10 +124,7 @@ function navigateToJsonPath(
       if (i === jsonPath.length - 1) {
         const docPos = document.positionAt(targetStart);
         editor.selection = new vscode.Selection(docPos, docPos);
-        editor.revealRange(
-          new vscode.Range(docPos, docPos),
-          vscode.TextEditorRevealType.InCenter
-        );
+        editor.revealRange(new vscode.Range(docPos, docPos), vscode.TextEditorRevealType.InCenter);
       }
     }
   }
@@ -127,12 +132,10 @@ function navigateToJsonPath(
 
 export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(
-    vscode.commands.registerCommand("jsontree.open", () =>
-      createWebviewForActiveEditor(context)
-    ),
+    vscode.commands.registerCommand("jsontree.open", () => createWebviewForActiveEditor(context)),
     vscode.commands.registerCommand("jsontree.openSelected", () =>
-      createWebviewForSelectedText(context)
-    )
+      createWebviewForSelectedText(context),
+    ),
   );
 }
 
@@ -182,7 +185,7 @@ function createWebviewForSelectedText(context: vscode.ExtensionContext) {
       onConfigChange.dispose();
     },
     null,
-    context.subscriptions
+    context.subscriptions,
   );
 }
 
@@ -222,7 +225,7 @@ function createWebviewForActiveEditor(context: vscode.ExtensionContext) {
       onConfigChange.dispose();
     },
     null,
-    context.subscriptions
+    context.subscriptions,
   );
 }
 

@@ -29,7 +29,7 @@ export const LabelRenderer: React.FC<LabelRendererProps> = ({
         onLabelClick(jsonPath);
       }
     },
-    [keyPath, onLabelClick]
+    [keyPath, onLabelClick],
   );
 
   return (

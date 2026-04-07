@@ -23,7 +23,7 @@ export const ItemSummary: React.FC<{
         setTimeout(() => setCopied(false), 1200);
       });
     },
-    [data]
+    [data],
   );
 
   let label: string;

@@ -7,7 +7,9 @@
   padding: 0;
 }
 
-html, body, #root {
+html,
+body,
+#root {
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -15,8 +17,9 @@ html, body, #root {
 }
 
 body {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    "Liberation Mono", "Courier New", monospace;
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
+    monospace;
   font-size: 13px;
   line-height: 1.5;
   background: transparent;
@@ -167,9 +170,17 @@ body {
 }
 
 @keyframes jsontree-fadeout {
-  0% { opacity: 1; transform: translateX(-50%) translateY(0); }
-  70% { opacity: 1; }
-  100% { opacity: 0; transform: translateX(-50%) translateY(-4px); }
+  0% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-4px);
+  }
 }
 
 /* ===== UUID Badge ===== */
@@ -200,7 +211,9 @@ body {
   pointer-events: none;
   opacity: 0;
   transform: translateY(4px);
-  transition: opacity 0.15s ease, transform 0.15s ease;
+  transition:
+    opacity 0.15s ease,
+    transform 0.15s ease;
 }
 
 .jsontree-tooltip.visible {
@@ -315,7 +328,9 @@ body {
   pointer-events: none;
   opacity: 0;
   transform: translateY(4px);
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
 }
 
 .jsontree-image-popup.visible {
@@ -438,7 +453,6 @@ body {
   background: rgba(76, 175, 80, 0.22);
 }
 
-
 .jsontree-markdown-wrapper {
   display: block;
   position: relative;
@@ -504,9 +518,15 @@ body {
   color: var(--vscode-symbolIcon-propertyForeground, #dcdcaa);
 }
 
-.jsontree-markdown-content h1 { font-size: 1.3em; }
-.jsontree-markdown-content h2 { font-size: 1.15em; }
-.jsontree-markdown-content h3 { font-size: 1.05em; }
+.jsontree-markdown-content h1 {
+  font-size: 1.3em;
+}
+.jsontree-markdown-content h2 {
+  font-size: 1.15em;
+}
+.jsontree-markdown-content h3 {
+  font-size: 1.05em;
+}
 
 .jsontree-markdown-content h1:first-child,
 .jsontree-markdown-content h2:first-child,
@@ -549,5 +569,3 @@ body {
 .jsontree-markdown-content strong {
   color: var(--vscode-editor-foreground, #e0e0e0);
 }
-
-

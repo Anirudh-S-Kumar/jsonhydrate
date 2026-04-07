@@ -13,17 +13,17 @@ export function createWebviewPanel(context: vscode.ExtensionContext, title = "JS
       enableScripts: true,
       retainContextWhenHidden: true,
       localResourceRoots: [webviewDir, vscode.Uri.file(path.join(extPath, "assets"))],
-    }
+    },
   );
 
   const iconPath = vscode.Uri.file(path.join(extPath, "assets", "icon-dark.svg"));
   panel.iconPath = iconPath;
 
   const scriptUri = panel.webview.asWebviewUri(
-    vscode.Uri.file(path.join(extPath, "build", "webview", "index.js"))
+    vscode.Uri.file(path.join(extPath, "build", "webview", "index.js")),
   );
   const styleUri = panel.webview.asWebviewUri(
-    vscode.Uri.file(path.join(extPath, "build", "webview", "index.css"))
+    vscode.Uri.file(path.join(extPath, "build", "webview", "index.css")),
   );
 
   const nonce = getNonce();
