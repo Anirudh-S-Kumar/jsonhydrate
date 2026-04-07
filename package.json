@@ -1,0 +1,211 @@
+{
+  "name": "jsontree-viewer",
+  "displayName": "JSON Tree Viewer",
+  "description": "Visualize JSON files as interactive collapsible trees with UUID highlighting, datetime detection, and custom rules.",
+  "version": "0.1.0",
+  "publisher": "anirudh-kumar",
+  "license": "Apache-2.0",
+  "engines": {
+    "vscode": "^1.86.0"
+  },
+  "categories": [
+    "Visualization"
+  ],
+  "keywords": [
+    "json",
+    "tree",
+    "viewer",
+    "visualizer",
+    "uuid",
+    "datetime"
+  ],
+  "icon": "assets/icon.png",
+  "main": "./build/extension.js",
+  "activationEvents": [
+    "workspaceContains:**/*.json",
+    "onLanguage:json",
+    "onLanguage:jsonc"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "jsontree.open",
+        "title": "Open JSON Tree View",
+        "category": "JSON Tree",
+        "icon": {
+          "light": "./assets/icon-light.svg",
+          "dark": "./assets/icon-dark.svg"
+        }
+      },
+      {
+        "command": "jsontree.openSelected",
+        "title": "Open Selection in JSON Tree",
+        "category": "JSON Tree"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "jsontree.open",
+          "when": "resourceExtname == .json || editorLangId == json || editorLangId == jsonc",
+          "group": "navigation"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "jsontree.openSelected",
+          "when": "editorHasSelection",
+          "group": "navigation"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "JSON Tree Viewer",
+      "properties": {
+        "jsontree.uuid.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Highlight UUID values with a distinct color."
+        },
+        "jsontree.uuid.color": {
+          "type": "string",
+          "default": "#c792ea",
+          "description": "Color for UUID values."
+        },
+        "jsontree.uuid.additionalPatterns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [],
+          "description": "Additional regex patterns to detect as UUIDs (e.g. custom ID formats)."
+        },
+        "jsontree.datetime.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Detect and enrich datetime values with hover tooltips."
+        },
+        "jsontree.datetime.color": {
+          "type": "string",
+          "default": "#ffcb6b",
+          "description": "Color for datetime values."
+        },
+        "jsontree.datetime.keyHints": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "time",
+            "date",
+            "created",
+            "updated",
+            "timestamp",
+            "_at",
+            "_on",
+            "epoch",
+            "expires",
+            "modified"
+          ],
+          "description": "Key name substrings that hint a numeric value is a timestamp. Used for 10/13-digit numbers."
+        },
+        "jsontree.datetime.unixRangeMin": {
+          "type": "number",
+          "default": 0,
+          "description": "Minimum Unix timestamp (seconds) to consider valid (default: 1970-01-01)."
+        },
+        "jsontree.datetime.unixRangeMax": {
+          "type": "number",
+          "default": 4102444800,
+          "description": "Maximum Unix timestamp (seconds) to consider valid (default: 2100-01-01)."
+        },
+        "jsontree.customRules": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Rule name (shown in tooltips)."
+              },
+              "pattern": {
+                "type": "string",
+                "description": "Regex pattern to match values."
+              },
+              "color": {
+                "type": "string",
+                "description": "Highlight color (hex)."
+              },
+              "tooltip": {
+                "type": "string",
+                "description": "Tooltip text (use $0 for full match, $1-$9 for groups)."
+              },
+              "keyFilter": {
+                "type": "string",
+                "description": "Optional: only apply to values under keys matching this regex."
+              }
+            },
+            "required": [
+              "name",
+              "pattern",
+              "color"
+            ]
+          },
+          "default": [],
+          "markdownDescription": "Add custom value detection rules. Each rule is a regex that, when matched, highlights the value in the specified color.\n\nExample — detect AWS ARNs:\n```json\n{\n  \"name\": \"AWS ARN\",\n  \"pattern\": \"^arn:aws:[a-z0-9-]+:[a-z0-9-]*:[0-9]*:.+$\",\n  \"color\": \"#ff9e64\",\n  \"tooltip\": \"AWS Resource: $0\"\n}\n```"
+        },
+        "jsontree.markdown.keyHints": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "body",
+            "markdown",
+            "description",
+            "notes",
+            "summary",
+            "comment",
+            "readme",
+            "md"
+          ],
+          "description": "Key name substrings that hint a value should be rendered as markdown."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run build",
+    "dev": "vite",
+    "build": "vite build && node esbuild.config.mjs --production",
+    "build:dev": "vite build && node esbuild.config.mjs",
+    "watch": "node esbuild.config.mjs --watch",
+    "watch:webview": "vite build --watch",
+    "test": "vitest",
+    "launch": "npm run build:dev && code --extensionDevelopmentPath=$PWD $PWD/tests/fixtures $PWD/tests/fixtures/test-data.json"
+  },
+  "dependencies": {
+    "fflate": "^0.8.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-json-tree": "^0.20.0",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1"
+  },
+  "devDependencies": {
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/node": "^22.19.17",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@types/vscode": "^1.86.0",
+    "@vitejs/plugin-react": "^4.3.0",
+    "esbuild": "^0.25.0",
+    "jsdom": "^29.0.2",
+    "typescript": "^5.7.0",
+    "vite": "^6.0.0",
+    "vitest": "^4.1.2"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run Extension",
+      "type": "extensionHost",
+      "request": "launch",
+      "args": [
+        "--extensionDevelopmentPath=${workspaceFolder}",
+        "${workspaceFolder}/tests/fixtures",
+        "${workspaceFolder}/tests/fixtures/test-data.json"
+      ],
+      "outFiles": [
+        "${workspaceFolder}/build/**/*.js"
+      ],
+      "preLaunchTask": "npm: build:dev"
+    }
+  ]
+}

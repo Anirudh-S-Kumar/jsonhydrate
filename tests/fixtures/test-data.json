@@ -1,0 +1,61 @@
+{
+  "user": {
+    "id": "550e8400-e29b-41d4-a716-446655440000",
+    "name": "John Doe",
+    "email": "john@example.com",
+    "created_at": 1705312200,
+    "updated_at": 1705312200000,
+    "last_login": "2024-01-15T10:30:00Z",
+    "birth_date": "1990-05-20",
+    "avatar": "https://picsum.photos/200/200.jpg",
+    "session_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+    "profile_color": "#c792ea",
+    "banner_color": "#1e88e5",
+    "badge_color": "rgb(255, 87, 34)",
+    "is_active": true,
+    "age": 34,
+    "score": null,
+    "roles": ["admin", "editor"],
+    "website": "https://example.com",
+    "bio_encoded": "SGVsbG8sIEkgYW0gSm9obiBEb2UuIEkgbGlrZSBjb2RpbmcgYW5kIGNvZmZlZS4=",
+    "preferences_json": "{\"theme\":\"dark\",\"language\":\"en\",\"notifications\":{\"email\":true,\"push\":false}}"
+  },
+  "order": {
+    "order_id": "a1b2c3d4-e5f6-4789-abcd-ef0123456789",
+    "product_id": "f47ac10b58cc4372a5670e02b2c3d479",
+    "timestamp": 1705398600,
+    "delivery_date": "01/20/2024",
+    "product_image": "https://picsum.photos/seed/widget/400/300.webp",
+    "items": [
+      { "name": "Widget A", "price": 29.99, "qty": 2 },
+      { "name": "Widget B", "price": 49.99, "qty": 1 },
+      { "name": "Widget C", "price": 9.99, "qty": 5 }
+    ],
+    "notes": "Please deliver between 2024-01-20 14:00:00 and 2024-01-20 18:00:00",
+    "status": "shipped",
+    "total": 129.92,
+    "shipping_data": "{\"carrier\":\"FedEx\",\"tracking\":\"1234567890\",\"estimated_arrival\":\"2024-01-22T12:00:00Z\"}"
+  },
+  "metadata": {
+    "gzip_test": "H4sIACCf02kAA6tWyi1OV7JS8kjNyclXSCvKz1Vwr8osUFTSUcpLLS5JTVGyqlZKVLIy1FFKUrKKLikqTdVJS8wpTo2trQUAORxoQTwAAAA=",
+    "version": "2.1.0",
+    "request_id": "6ba7b810-9dad-11d1-80b4-00c04fd430c8",
+    "modified": "Mon, 15 Jan 2024 10:30:00 +0000",
+    "counter": 42,
+    "empty_object": {},
+    "empty_array": [],
+    "logo": "https://placekitten.com/100/100.png",
+    "api_key_b64": "c2VjcmV0X2FwaV9rZXlfMTIzNDU2Nzg5MA==",
+    "nested": {
+      "deep": {
+        "value": "hello world",
+        "flag": false,
+        "expires_at": 1893456000,
+        "accent_color": "#ff5722",
+        "config": "[{\"id\":1,\"enabled\":true},{\"id\":2,\"enabled\":false}]"
+      }
+    },
+    "markdown_test": "# Geminae alte\n\n## Ait Polymestoris quercus veluti\n\nLorem markdownum auras at agresti **vera studeat neque** Tritoniacam dedit, mox sentit. Trinacris facit, fata aves dumque, est Alcyonen, **aversum**. Ferum sustineant patrem verso: mediusve manu pendentemque sint non sibi. Oscula et urnam terrebit obliquaque saxum *Hippomenen adhuc patientem* maestis.\n\nVitiataque lustrabere extentum, iuventus ullis!\n\n1. Hecaben matris arma Aurora Mercurio\n2. Possunt parentis promissa vires\n3. Et quoque monedula\n4. Nec spatium tellusque Phoebus\n5. Temporis monstra incessus Oeneus et pro illi\n6. Illum poma Peneide\n\n## Prolis apes patietur nequiquam\n\nFit funda fortuna undas exstinctum locumque. Coniunx dederat quae restat, gravitate crevit **cervice ille**: legebat animosos, viscera. Erat vincere pavit.\n\n> Hic haec olivae: tuum meri deam, *humum suis*. Est regi ridentem novaque\n> [pugnas fama](#prolis-apes-patietur-nequiquam), priori. Et *Sidonida sistite madidis*, se necetur, inter in.\n\n## Avoque Ceyca amat vana\n\nMundi fiet cornua metuit gemuere pocula; ulmus dixi, quoque celat. Lacus promisitque sole dantem adeunt deprendere coloni, deus ego Perseus? Retro vulnere inquit videtur ingemuere piumque orbem qui **constitit quidquid** nec semel nymphae.\n\n## Ilice simulacraque hunc\n\nLaniare secreta limite, ferunt noctem triones torvis, subito, pro `tunneling_configuration_soft` magni inmunis? Et suis columbas conplexa tamen Alcides.\n\n```javascript\nlossless_in_cross.scan_bitmap_dac(gigabyte_power.heapCross(\n    supercomputer_programming_toolbar, flaming_version_hardware +\n    ldapPhreaking, text_video + wavelength));\n```"
+  }
+}
+

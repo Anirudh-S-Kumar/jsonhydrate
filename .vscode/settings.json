@@ -1,0 +1,21 @@
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "files.exclude": {
+    "node_modules/": true,
+    "build/": true,
+    "dist/": true,
+    ".git/": true
+  },
+  "search.exclude": {
+    "node_modules/": true,
+    "build/": true,
+    "dist/": true,
+    "**/package-lock.json": true
+  },
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "typescript.preferences.importModuleSpecifier": "relative"
+}
