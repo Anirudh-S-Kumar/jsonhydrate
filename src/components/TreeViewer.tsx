@@ -6,6 +6,7 @@ import { transformData, type DecodableEntry } from "../transformData";
 import { LabelRenderer } from "./LabelRenderer.js";
 import { Toolbar } from "./Toolbar.js";
 import { ValueRenderer } from "./ValueRenderer.js";
+import { runDetectors } from "../detectors/index.js";
 
 interface TreeViewerProps {
   data: unknown;
@@ -17,13 +18,18 @@ interface TreeViewerProps {
 import { ItemSummary } from "./ItemSummary.js";
 const DECODE_ICONS: Record<string, { icon: string; label: string }> = {
   jwt: { icon: "🔐", label: "JWT" },
-  "base64": { icon: "📦", label: "B64" },
-  "gzip": { icon: "🗜️", label: "Gzip" },
+  base64: { icon: "📦", label: "B64" },
+  gzip: { icon: "🗜️", label: "Gzip" },
   "stringified-json": { icon: "📋", label: "JSON" },
-  "multiline": { icon: "📝", label: "Text" },
+  multiline: { icon: "📝", label: "Text" },
 };
 
-export const TreeViewer: React.FC<TreeViewerProps> = ({ data, theme, detectors, settings }) => {
+export const TreeViewer: React.FC<TreeViewerProps> = ({
+  data,
+  theme,
+  detectors,
+  settings,
+}) => {
   const treeTheme = getTreeTheme(theme);
   const containerRef = useRef<HTMLDivElement>(null);
   const [expandLevel, setExpandLevel] = useState<number | false>(2);
@@ -73,14 +79,42 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({ data, theme, detectors, 
   }, []);
 
   const decodeAll = useCallback(() => {
-    const allPaths = new Set<string>();
-    for (const d of decodables) allPaths.add(d.path);
-    setDecodedPaths(allPaths);
+    const newPaths = new Set<string>();
+    for (const d of decodables) {
+      if (!(d.type === "multiline" && d.autoRender === true)) {
+        newPaths.add(d.path);
+      }
+    }
+    setDecodedPaths(newPaths);
   }, [decodables]);
 
   const undecodeAll = useCallback(() => {
-    setDecodedPaths(new Set());
-  }, []);
+    const newPaths = new Set<string>();
+    for (const d of decodables) {
+      if (d.type === "multiline" && d.autoRender === true) {
+        newPaths.add(d.path);
+      }
+    }
+    setDecodedPaths(newPaths);
+  }, [decodables]);
+
+  const canDecodeAll = useMemo(
+    () =>
+      decodables.some((d) => {
+        const isAuto = d.type === "multiline" && d.autoRender === true;
+        return isAuto ? decodedPaths.has(d.path) : !decodedPaths.has(d.path);
+      }),
+    [decodables, decodedPaths],
+  );
+
+  const canUndecodeAll = useMemo(
+    () =>
+      decodables.some((d) => {
+        const isAuto = d.type === "multiline" && d.autoRender === true;
+        return isAuto ? !decodedPaths.has(d.path) : decodedPaths.has(d.path);
+      }),
+    [decodables, decodedPaths],
+  );
 
   const handleLabelClick = useCallback((jsonPath: (string | number)[]) => {
     window.postMessage({ type: "navigateToKey", path: jsonPath }, "*");
@@ -92,8 +126,8 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({ data, theme, detectors, 
         onExpandAll={handleExpandAll}
         onCollapseAll={handleCollapseAll}
         onExpandDefault={handleExpandDefault}
-        onDecodeAll={decodables.length > 0 ? decodeAll : undefined}
-        onUndecodeAll={decodedPaths.size > 0 ? undecodeAll : undefined}
+        onDecodeAll={canDecodeAll ? decodeAll : undefined}
+        onUndecodeAll={canUndecodeAll ? undecodeAll : undefined}
       />
       <JSONTree
         key={treeKey}
@@ -112,39 +146,46 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({ data, theme, detectors, 
           const decodable = decodableMap.get(pathStr);
           const isDecoded = decodedPaths.has(pathStr);
 
-          // For decoded multiline (markdown), put the badge FIRST (inline with the key),
-          // then a <br> so the markdown block starts on the next line below.
-          const isDecodedMarkdown = isDecoded && decodable?.type === "multiline";
+          const isAutoMarkdown =
+            decodable?.type === "multiline" && decodable.autoRender === true;
+
+          let isRendered = isDecoded;
+          if (isAutoMarkdown) {
+            isRendered = !isDecoded;
+          }
+
+          const isDecodedMarkdown =
+            isRendered && decodable?.type === "multiline";
 
           const badgeButton = decodable && (
             <button
-              className={`jsontree-decode-badge${isDecoded ? " active" : ""}`}
+              className={`jsontree-decode-badge${isRendered ? " active" : ""}`}
               onClick={(e) => {
                 e.stopPropagation();
                 toggleDecode(pathStr);
               }}
               title={
-                isDecoded
+                isRendered
                   ? `Show raw ${DECODE_ICONS[decodable.type]?.label}`
-                  : `Decode ${DECODE_ICONS[decodable.type]?.label}`
+                  : `Render ${DECODE_ICONS[decodable.type]?.label}`
               }
             >
               {DECODE_ICONS[decodable.type]?.icon}{" "}
-              {isDecoded ? "Raw" : DECODE_ICONS[decodable.type]?.label}
+              {isRendered ? "Raw" : DECODE_ICONS[decodable.type]?.label}
             </button>
           );
 
           return (
             <span>
               {isDecodedMarkdown && badgeButton}
-              {isDecodedMarkdown && <br />}
+              {isDecodedMarkdown && badgeButton && <br />}
               <ValueRenderer
                 value={value}
                 valueAsString={valueAsString}
                 keyPath={[...keyPath]}
                 detectors={detectors}
                 theme={theme}
-                isDecoded={isDecoded}
+                forceMarkdown={isDecodedMarkdown}
               />
               {!isDecodedMarkdown && badgeButton}
             </span>
@@ -165,18 +206,20 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({ data, theme, detectors, 
                 expandable={expandable}
                 onLabelClick={handleLabelClick}
               />
-              {decodable && decodedPaths.has(pathStr) && (nodeType === "Object" || nodeType === "Array") && (
-                <button
-                  className="jsontree-decode-badge active"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    toggleDecode(pathStr);
-                  }}
-                  title={`Show raw ${DECODE_ICONS[decodable.type]?.label}`}
-                >
-                  {DECODE_ICONS[decodable.type]?.icon} Raw
-                </button>
-              )}
+              {decodable &&
+                decodedPaths.has(pathStr) &&
+                (nodeType === "Object" || nodeType === "Array") && (
+                  <button
+                    className="jsontree-decode-badge active"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleDecode(pathStr);
+                    }}
+                    title={`Show raw ${DECODE_ICONS[decodable.type]?.label}`}
+                  >
+                    {DECODE_ICONS[decodable.type]?.icon} Raw
+                  </button>
+                )}
             </span>
           );
         }}

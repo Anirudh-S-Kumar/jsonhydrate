@@ -1,4 +1,5 @@
 import * as fflate from "fflate";
+import { MarkdownDetector } from "./detectors/markdownDetector";
 import type { SettingsPayload } from "./detectors";
 
 /**
@@ -44,6 +45,7 @@ export interface DecodableEntry {
   path: string;
   type: "jwt" | "base64" | "stringified-json" | "gzip" | "multiline";
   raw: string;
+  autoRender?: boolean;
 }
 
 export interface TransformResult {
@@ -179,14 +181,26 @@ function recursiveDecode(
     }
   }
 
-  // 4. Multiline or Markdown detection last
-  const keyName = path.split(".").pop()?.toLowerCase() || "";
-  const isKeywordMatch = settings?.markdown?.keyHints?.some((h) =>
-    keyName.includes(h.toLowerCase())
-  );
+  const mdDetector = new MarkdownDetector();
+  let autoRenderConfig = true;
+  if (settings) {
+    autoRenderConfig = settings.markdown?.autoRender ?? true;
+    mdDetector.configure(settings as unknown as Record<string, unknown>);
+  }
+  
+  // We need to pass the leaf key name to match the detector's logic
+  const keyName = path.split(".").pop() || "";
+  const mdResult = mdDetector.detect(value, [keyName]);
 
-  if (value.includes("\n") || /^#\s/m.test(value) || isKeywordMatch) {
-    if (depth === 0) decodables.push({ path, type: "multiline", raw: value });
+  if (mdResult) {
+    if (depth === 0) {
+      decodables.push({ 
+        path, 
+        type: "multiline", 
+        raw: value, 
+        autoRender: autoRenderConfig && mdResult.type === "markdown" 
+      });
+    }
   }
 
   return { value, decodables };

@@ -1,5 +1,6 @@
 import { CustomRegexDetector } from "./customRegexDetector";
 import { DatetimeDetector } from "./datetimeDetector";
+import { MarkdownDetector } from "./markdownDetector";
 import type { CustomRuleConfig, DetectionResult, IValueDetector, SettingsPayload } from "./types";
 import { UuidDetector } from "./uuidDetector";
 
@@ -8,13 +9,15 @@ export type { DetectionResult, IValueDetector, SettingsPayload, CustomRuleConfig
 export function createDetectors(settings?: SettingsPayload): IValueDetector[] {
   const uuid = new UuidDetector();
   const datetime = new DatetimeDetector();
+  const markdown = new MarkdownDetector();
 
   if (settings) {
     uuid.configure(settings as unknown as Record<string, unknown>);
     datetime.configure(settings as unknown as Record<string, unknown>);
+    markdown.configure(settings as unknown as Record<string, unknown>);
   }
 
-  const detectors: IValueDetector[] = [uuid, datetime];
+  const detectors: IValueDetector[] = [uuid, datetime, markdown];
 
   // Create custom rule detectors
   if (settings?.customRules && Array.isArray(settings.customRules)) {

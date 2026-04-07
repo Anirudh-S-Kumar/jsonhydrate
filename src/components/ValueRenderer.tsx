@@ -11,7 +11,7 @@ interface ValueRendererProps {
   keyPath: (string | number)[];
   detectors: IValueDetector[];
   theme: "light" | "dark";
-  isDecoded?: boolean;
+  forceMarkdown?: boolean;
 }
 
 // ======================== Helpers ========================
@@ -66,13 +66,17 @@ const CopyableValue: React.FC<{
         setTimeout(() => setCopied(false), 1200);
       });
     },
-    [copyText]
+    [copyText],
   );
 
   return (
     <span className="jsontree-value-wrapper">
       {children}
-      <button className="jsontree-copy-btn" onClick={handleCopy} title="Copy value">
+      <button
+        className="jsontree-copy-btn"
+        onClick={handleCopy}
+        title="Copy value"
+      >
         <CopyIcon />
       </button>
       {copied && <span className="jsontree-copied-toast">Copied!</span>}
@@ -88,7 +92,10 @@ const ColorPreview: React.FC<{
 }> = ({ color, valueAsString }) => (
   <CopyableValue copyText={color}>
     <span className="jsontree-color-preview">
-      <span className="jsontree-color-swatch" style={{ backgroundColor: color }} />
+      <span
+        className="jsontree-color-swatch"
+        style={{ backgroundColor: color }}
+      />
       {valueAsString}
     </span>
   </CopyableValue>
@@ -130,7 +137,7 @@ const ImagePreview: React.FC<{
         window.postMessage({ type: "openUrl", url: fullUrl }, "*");
       }
     },
-    [fullUrl]
+    [fullUrl],
   );
 
   return (
@@ -150,11 +157,7 @@ const ImagePreview: React.FC<{
           className={`jsontree-image-popup ${visible ? "visible" : ""}`}
           style={{ top: position.top, left: position.left }}
         >
-          <img
-            src={fullUrl}
-            alt="Preview"
-            onError={() => setImgError(true)}
-          />
+          <img src={fullUrl} alt="Preview" onError={() => setImgError(true)} />
         </div>
       )}
     </CopyableValue>
@@ -162,24 +165,36 @@ const ImagePreview: React.FC<{
 };
 
 // ======================== Markdown block ========================
-// Rendered as a real block element so it doesn't fight with inline layout.
-// The copy button sits in the top-right corner.
 
-const MarkdownBlock: React.FC<{ raw: string; normalized: string }> = ({ raw, normalized }) => {
+const MarkdownBlock: React.FC<{ raw: string; normalized: string }> = ({
+  raw,
+  normalized,
+}) => {
   const [copied, setCopied] = useState(false);
 
-  const handleCopy = useCallback((e: React.MouseEvent) => {
-    e.stopPropagation();
-    navigator.clipboard.writeText(raw).then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1200);
-    });
-  }, [raw]);
+  const handleCopy = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+      navigator.clipboard.writeText(raw).then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 1200);
+      });
+    },
+    [raw],
+  );
 
   return (
     <div className="jsontree-markdown-wrapper">
-      <button className="jsontree-markdown-copy" onClick={handleCopy} title="Copy raw value">
-        {copied ? <span style={{ color: "#4ec9b0", fontSize: "10px" }}>✓</span> : <CopyIcon />}
+      <button
+        className="jsontree-markdown-copy"
+        onClick={handleCopy}
+        title="Copy raw value"
+      >
+        {copied ? (
+          <span style={{ color: "#4ec9b0", fontSize: "10px" }}>✓</span>
+        ) : (
+          <CopyIcon />
+        )}
       </button>
       <div className="jsontree-markdown-content">
         <ReactMarkdown remarkPlugins={[remarkGfm]}>{normalized}</ReactMarkdown>
@@ -187,6 +202,19 @@ const MarkdownBlock: React.FC<{ raw: string; normalized: string }> = ({ raw, nor
     </div>
   );
 };
+
+function normalizeMarkdown(value: string): string {
+  return value
+    .split("\n")
+    .map((line, i, arr) => {
+      const next = arr[i + 1];
+      if (line.trim() === "" || next === undefined || next.trim() === "")
+        return line;
+      if (/^(\*|#|-|>|\d+\.)/.test(next.trim())) return line;
+      return line + "  ";
+    })
+    .join("\n");
+}
 
 // ======================== Main ValueRenderer ========================
 
@@ -196,7 +224,7 @@ export const ValueRenderer: React.FC<ValueRendererProps> = ({
   keyPath,
   detectors,
   theme,
-  isDecoded = false,
+  forceMarkdown = false,
 }) => {
   const detection = useMemo(() => {
     return runDetectors(value, keyPath, detectors);
@@ -211,12 +239,23 @@ export const ValueRenderer: React.FC<ValueRendererProps> = ({
     return String(value);
   }, [value]);
 
-  // 1. Detected types (UUID, datetime, custom)
+  // 1. Forced Markdown (highest priority, controlled by TreeViewer toggle)
+  if (forceMarkdown && typeof value === "string") {
+    const rawVal = detection?.raw ?? value;
+    const normalized = normalizeMarkdown(rawVal);
+    return <MarkdownBlock raw={rawVal} normalized={normalized} />;
+  }
+
+  // 2. Detected types (UUID, datetime, custom)
   if (detection) {
     if (detection.type === "uuid") {
       return (
         <CopyableValue copyText={detection.raw}>
-          <UuidBadge value={detection.raw} color={detection.color} tooltip={detection.tooltip} />
+          <UuidBadge
+            value={detection.raw}
+            color={detection.color}
+            tooltip={detection.tooltip}
+          />
         </CopyableValue>
       );
     }
@@ -235,21 +274,25 @@ export const ValueRenderer: React.FC<ValueRendererProps> = ({
       );
     }
 
-    // Custom rules
-    return (
-      <CopyableValue copyText={copyValue}>
-        <span
-          className={detection.className}
-          style={{ color: detection.color }}
-          title={detection.tooltip}
-        >
-          {displayString}
-        </span>
-      </CopyableValue>
-    );
+    // Skip markdown or multiline hints if forceMarkdown is false,
+    // let them fall through to default string rendering so the user can easily view raw text.
+    if (detection.type !== "markdown" && detection.type !== "multiline_hint") {
+      // Custom rules
+      return (
+        <CopyableValue copyText={copyValue}>
+          <span
+            className={detection.className}
+            style={{ color: detection.color }}
+            title={detection.tooltip}
+          >
+            {displayString}
+          </span>
+        </CopyableValue>
+      );
+    }
   }
 
-  // 2. Color preview
+  // 3. Color preview
   const colorValue = isColorValue(value);
   if (colorValue) {
     return <ColorPreview color={colorValue} valueAsString={displayString} />;
@@ -259,23 +302,6 @@ export const ValueRenderer: React.FC<ValueRendererProps> = ({
   const imgUrl = isImageUrl(value);
   if (imgUrl) {
     return <ImagePreview url={imgUrl} valueAsString={displayString} />;
-  }
-
-  // 4. Multiline or Markdown — only when decoded
-  if (isDecoded && typeof value === "string") {
-    // Markdown ignores single \n — normalize by appending two spaces (Markdown <br>)
-    // but preserve intentional blank lines and lines before Markdown constructs.
-    const normalized = value
-      .split("\n")
-      .map((line, i, arr) => {
-        const next = arr[i + 1];
-        if (line.trim() === "" || next === undefined || next.trim() === "") return line;
-        if (/^(\*|#|-|>|\d+\.)/.test(next.trim())) return line;
-        return line + "  ";
-      })
-      .join("\n");
-
-    return <MarkdownBlock raw={value} normalized={normalized} />;
   }
 
   // 5. Default

@@ -46,6 +46,7 @@ export interface SettingsPayload {
   };
   markdown: {
     keyHints: string[];
+    autoRender: boolean;
   };
   customRules: CustomRuleConfig[];
 }

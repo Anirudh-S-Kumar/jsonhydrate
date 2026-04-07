@@ -30,6 +30,7 @@ function getSettings(): Record<string, unknown> {
       keyHints: config.get<string[]>("markdown.keyHints", [
         "markdown", "description", "notes", "summary", "comment", "readme", "md"
       ]),
+      autoRender: config.get<boolean>("markdown.autoRender", true),
     },
     customRules: config.get<unknown[]>("customRules", []),
   };

@@ -170,6 +170,11 @@
             "md"
           ],
           "description": "Key name substrings that hint a value should be rendered as markdown."
+        },
+        "jsontree.markdown.autoRender": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically render values detected as Markdown blocks without manual toggling."
         }
       }
     }

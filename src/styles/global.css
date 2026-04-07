@@ -442,10 +442,14 @@ body {
 .jsontree-markdown-wrapper {
   display: block;
   position: relative;
-  margin: 6px 0 4px 0;
-  margin-left: 10px;
-  padding-left: 10px;
-  border-left: 1px solid rgba(128, 128, 128, 0.2);
+  margin: 4px 0 4px 8px;
+  padding: 4px 0 4px 12px;
+  border-left: 2px solid rgba(128, 128, 128, 0.15);
+  transition: border-color 0.2s ease;
+}
+
+.jsontree-markdown-wrapper:hover {
+  border-left-color: rgba(128, 128, 128, 0.3);
 }
 
 .jsontree-markdown-copy {

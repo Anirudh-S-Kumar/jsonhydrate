@@ -26,7 +26,7 @@ describe("ValueRenderer", () => {
         keyPath={["key"]}
         detectors={[]}
         theme="light"
-        isDecoded={true}
+        forceMarkdown={true}
       />
     );
     
@@ -58,7 +58,7 @@ describe("ValueRenderer", () => {
         keyPath={["key"]}
         detectors={[]}
         theme="light"
-        isDecoded={false}
+        forceMarkdown={false}
       />
     );
     

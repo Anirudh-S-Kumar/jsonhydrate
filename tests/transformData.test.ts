@@ -92,6 +92,7 @@ describe("transformData", () => {
       path: "notes",
       type: "multiline",
       raw: "This is some **important** content.",
+      autoRender: false,
     });
   });
 
@@ -104,6 +105,7 @@ describe("transformData", () => {
       path: "content",
       type: "multiline",
       raw: "# Quick Header",
+      autoRender: true,
     });
   });
 });

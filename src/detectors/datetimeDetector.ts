@@ -50,10 +50,7 @@ export class DatetimeDetector implements IValueDetector {
   name = "datetime";
   enabled = true;
   private color = "#ffcb6b";
-  private keyHints: string[] = [
-    "time", "date", "created", "updated", "timestamp",
-    "_at", "_on", "epoch", "expires", "modified",
-  ];
+  private keyHints: string[] = [];
   private unixRangeMin = 0; // 1970-01-01
   private unixRangeMax = 4102444800; // 2100-01-01
 
