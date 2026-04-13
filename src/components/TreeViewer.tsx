@@ -25,7 +25,8 @@ const DECODE_ICONS: Record<string, { icon: string; label: string }> = {
 };
 
 export const TreeViewer: React.FC<TreeViewerProps> = ({ data, theme, detectors, settings }) => {
-  const treeTheme = getTreeTheme(theme);
+  const overrides = settings?.theme ? settings.theme[theme] : undefined;
+  const treeTheme = getTreeTheme(theme, overrides);
   const containerRef = useRef<HTMLDivElement>(null);
   const [expandLevel, setExpandLevel] = useState<number | false>(2);
   const [treeKey, setTreeKey] = useState(0);
@@ -175,7 +176,7 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({ data, theme, detectors, 
               <ValueRenderer
                 value={value}
                 valueAsString={valueAsString}
-                keyPath={[...keyPath]}
+                keyPath={keyPath}
                 detectors={detectors}
                 theme={theme}
                 forceMarkdown={isDecodedMarkdown}

@@ -22,8 +22,10 @@ body {
     monospace;
   font-size: 13px;
   line-height: 1.5;
-  background: transparent;
-  color: var(--vscode-editor-foreground, #d4d4d4);
+  background: transparent !important;
+  color: inherit;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* ===== Root Container ===== */

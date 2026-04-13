@@ -182,9 +182,9 @@ function recursiveDecode(
   }
 
   const mdDetector = new MarkdownDetector();
-  let autoRenderConfig = true;
+  let autoRenderConfig = false;
   if (settings) {
-    autoRenderConfig = settings.markdown?.autoRender ?? true;
+    autoRenderConfig = settings.markdown?.autoRender ?? false;
     mdDetector.configure(settings as unknown as Record<string, unknown>);
   }
 

@@ -54,16 +54,24 @@ export class DatetimeDetector implements IValueDetector {
   private unixRangeMin = 0; // 1970-01-01
   private unixRangeMax = 4102444800; // 2100-01-01
 
-  configure(config: Record<string, unknown>): void {
+  configure(config: Record<string, unknown>, currentTheme?: "light" | "dark"): void {
     const dtConfig = config.datetime as Record<string, unknown> | undefined;
     if (!dtConfig) return;
 
     if (typeof dtConfig.enabled === "boolean") {
       this.enabled = dtConfig.enabled;
     }
-    if (typeof dtConfig.color === "string") {
+
+    // Pick color priority: 1. Theme-specific override, 2. Global setting, 3. Default
+    const themeConfig = config.theme as Record<string, any> | undefined;
+    const themeSpecific = currentTheme ? themeConfig?.[currentTheme] : undefined;
+
+    if (themeSpecific?.datetime) {
+      this.color = themeSpecific.datetime;
+    } else if (typeof dtConfig.color === "string") {
       this.color = dtConfig.color;
     }
+
     if (Array.isArray(dtConfig.keyHints)) {
       this.keyHints = dtConfig.keyHints.filter((k): k is string => typeof k === "string");
     }
@@ -75,7 +83,7 @@ export class DatetimeDetector implements IValueDetector {
     }
   }
 
-  private keyMatchesHint(keyPath: (string | number)[]): boolean {
+  private keyMatchesHint(keyPath: readonly (string | number)[]): boolean {
     if (keyPath.length === 0) return false;
     const key = String(keyPath[0]).toLowerCase();
     return this.keyHints.some((hint) => key.includes(hint.toLowerCase()));
@@ -129,7 +137,7 @@ export class DatetimeDetector implements IValueDetector {
     return null;
   }
 
-  private tryParseNumber(value: number, keyPath: (string | number)[]): Date | null {
+  private tryParseNumber(value: number, keyPath: readonly (string | number)[]): Date | null {
     if (!Number.isFinite(value) || value < 0) return null;
 
     // Check if key name hints at this being a timestamp
@@ -156,7 +164,7 @@ export class DatetimeDetector implements IValueDetector {
     return null;
   }
 
-  detect(value: unknown, keyPath: (string | number)[]): DetectionResult | null {
+  detect(value: unknown, keyPath: readonly (string | number)[]): DetectionResult | null {
     if (!this.enabled) return null;
 
     let date: Date | null = null;

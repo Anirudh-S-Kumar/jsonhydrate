@@ -8,7 +8,7 @@ import { UuidBadge } from "./UuidBadge";
 interface ValueRendererProps {
   value: unknown;
   valueAsString: unknown;
-  keyPath: (string | number)[];
+  keyPath: readonly (string | number)[];
   detectors: IValueDetector[];
   theme: "light" | "dark";
   forceMarkdown?: boolean;

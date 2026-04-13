@@ -18,9 +18,9 @@ export interface IValueDetector {
   /** Whether this detector is currently enabled */
   enabled: boolean;
   /** Return a DetectionResult if this value matches, or null */
-  detect(value: unknown, keyPath: (string | number)[]): DetectionResult | null;
+  detect(value: unknown, keyPath: readonly (string | number)[]): DetectionResult | null;
   /** Update this detector's config from VS Code settings */
-  configure(config: Record<string, unknown>): void;
+  configure(config: Record<string, unknown>, currentTheme?: "light" | "dark"): void;
 }
 
 export interface CustomRuleConfig {
@@ -49,4 +49,24 @@ export interface SettingsPayload {
     autoRender: boolean;
   };
   customRules: CustomRuleConfig[];
+  theme?: {
+    dark: {
+      background: string;
+      keys: string;
+      strings: string;
+      numbers: string;
+      booleans: string;
+      uuid?: string;
+      datetime?: string;
+    };
+    light: {
+      background: string;
+      keys: string;
+      strings: string;
+      numbers: string;
+      booleans: string;
+      uuid?: string;
+      datetime?: string;
+    };
+  };
 }

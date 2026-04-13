@@ -11,7 +11,7 @@ export class MarkdownDetector implements IValueDetector {
   enabled = true;
   private keyHints: string[] = [];
 
-  configure(config: Record<string, unknown>): void {
+  configure(config: Record<string, unknown>, _currentTheme?: "light" | "dark"): void {
     const mdConfig = config.markdown as Record<string, unknown> | undefined;
     if (!mdConfig) return;
 
@@ -23,7 +23,7 @@ export class MarkdownDetector implements IValueDetector {
     }
   }
 
-  detect(value: unknown, keyPath: (string | number)[]): DetectionResult | null {
+  detect(value: unknown, keyPath: readonly (string | number)[]): DetectionResult | null {
     if (!this.enabled) return null;
     if (typeof value !== "string") return null;
 

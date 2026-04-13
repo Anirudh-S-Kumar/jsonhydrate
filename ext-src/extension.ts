@@ -47,6 +47,26 @@ function getSettings(): Record<string, unknown> {
       autoRender: config.get<boolean>("markdown.autoRender", true),
     },
     customRules: config.get<unknown[]>("customRules", []),
+    theme: {
+      dark: {
+        background: config.get<string>("theme.dark.background", "#0a0a0c"),
+        keys: config.get<string>("theme.dark.keys", "#59b8ff"),
+        strings: config.get<string>("theme.dark.strings", "#98c379"),
+        numbers: config.get<string>("theme.dark.numbers", "#e8c479"),
+        booleans: config.get<string>("theme.dark.booleans", "#f85c50"),
+        uuid: config.get<string>("theme.dark.uuid", "#c792ea"),
+        datetime: config.get<string>("theme.dark.datetime", "#ffcb6b"),
+      },
+      light: {
+        background: config.get<string>("theme.light.background", "#ffffff"),
+        keys: config.get<string>("theme.light.keys", "#005cc5"),
+        strings: config.get<string>("theme.light.strings", "#22863a"),
+        numbers: config.get<string>("theme.light.numbers", "#d73a49"),
+        booleans: config.get<string>("theme.light.booleans", "#d73a49"),
+        uuid: config.get<string>("theme.light.uuid", "#7b1fa2"),
+        datetime: config.get<string>("theme.light.datetime", "#af8600"),
+      },
+    },
   };
 }
 

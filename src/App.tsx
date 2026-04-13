@@ -9,8 +9,10 @@ declare global {
 }
 
 function getTheme(): "light" | "dark" {
-  const kind = document.body.getAttribute("data-vscode-theme-kind");
-  if (kind?.includes("light")) return "light";
+  if (typeof document === "undefined") return "dark";
+  const body = document.body;
+  const kind = body.getAttribute("data-vscode-theme-kind");
+  if (kind?.includes("light") || body.classList.contains("vscode-light")) return "light";
   return "dark";
 }
 
@@ -21,11 +23,11 @@ const App: React.FC = () => {
   const [json, setJson] = useState("{}");
   const [settings, setSettings] = useState<SettingsPayload | null>(null);
   const [parseError, setParseError] = useState<string | null>(null);
-  const theme = getTheme();
+  const [theme, setTheme] = useState<"light" | "dark">(getTheme());
 
   const detectors: IValueDetector[] = useMemo(() => {
-    return createDetectors(settings ?? undefined);
-  }, [settings]);
+    return createDetectors(settings ?? undefined, theme);
+  }, [settings, theme]);
 
   const parsedJson = useMemo(() => {
     try {
@@ -65,8 +67,18 @@ const App: React.FC = () => {
   useEffect(() => {
     vscodeApi?.postMessage("ready");
 
+    // Initial sync
+    setTheme(getTheme());
+
+    // Watch for VS Code theme changes
+    const observer = new MutationObserver(() => setTheme(getTheme()));
+    observer.observe(document.body, { attributes: true, attributeFilter: ["class", "data-vscode-theme-kind"] });
+
     window.addEventListener("message", handleMessage);
-    return () => window.removeEventListener("message", handleMessage);
+    return () => {
+      window.removeEventListener("message", handleMessage);
+      observer.disconnect();
+    };
   }, [handleMessage]);
 
   if (parseError) {

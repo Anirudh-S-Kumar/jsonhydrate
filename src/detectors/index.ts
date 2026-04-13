@@ -6,15 +6,18 @@ import { UuidDetector } from "./uuidDetector";
 
 export type { DetectionResult, IValueDetector, SettingsPayload, CustomRuleConfig };
 
-export function createDetectors(settings?: SettingsPayload): IValueDetector[] {
+export function createDetectors(
+  settings?: SettingsPayload,
+  theme?: "light" | "dark",
+): IValueDetector[] {
   const uuid = new UuidDetector();
   const datetime = new DatetimeDetector();
   const markdown = new MarkdownDetector();
 
   if (settings) {
-    uuid.configure(settings as unknown as Record<string, unknown>);
-    datetime.configure(settings as unknown as Record<string, unknown>);
-    markdown.configure(settings as unknown as Record<string, unknown>);
+    uuid.configure(settings as unknown as Record<string, unknown>, theme);
+    datetime.configure(settings as unknown as Record<string, unknown>, theme);
+    markdown.configure(settings as unknown as Record<string, unknown>, theme);
   }
 
   const detectors: IValueDetector[] = [uuid, datetime, markdown];
@@ -33,7 +36,7 @@ export function createDetectors(settings?: SettingsPayload): IValueDetector[] {
 
 export function runDetectors(
   value: unknown,
-  keyPath: (string | number)[],
+  keyPath: readonly (string | number)[],
   detectors: IValueDetector[],
 ): DetectionResult | null {
   for (const detector of detectors) {

@@ -28,11 +28,11 @@ export class CustomRegexDetector implements IValueDetector {
     }
   }
 
-  configure(): void {
+  configure(_config: Record<string, unknown>, _currentTheme?: "light" | "dark"): void {
     // Config is set via constructor; no-op for custom rules
   }
 
-  detect(value: unknown, keyPath: (string | number)[]): DetectionResult | null {
+  detect(value: unknown, keyPath: readonly (string | number)[]): DetectionResult | null {
     if (!this.enabled) return null;
     if (typeof value !== "string" && typeof value !== "number") return null;
 

@@ -18,16 +18,24 @@ export class UuidDetector implements IValueDetector {
   private color = "#c792ea";
   private additionalPatterns: RegExp[] = [];
 
-  configure(config: Record<string, unknown>): void {
+  configure(config: Record<string, unknown>, currentTheme?: "light" | "dark"): void {
     const uuidConfig = config.uuid as Record<string, unknown> | undefined;
     if (!uuidConfig) return;
 
     if (typeof uuidConfig.enabled === "boolean") {
       this.enabled = uuidConfig.enabled;
     }
-    if (typeof uuidConfig.color === "string") {
+
+    // Pick color priority: 1. Theme-specific override, 2. Global setting, 3. Default
+    const themeConfig = config.theme as Record<string, any> | undefined;
+    const themeSpecific = currentTheme ? themeConfig?.[currentTheme] : undefined;
+
+    if (themeSpecific?.uuid) {
+      this.color = themeSpecific.uuid;
+    } else if (typeof uuidConfig.color === "string") {
       this.color = uuidConfig.color;
     }
+
     if (Array.isArray(uuidConfig.additionalPatterns)) {
       this.additionalPatterns = [];
       for (const p of uuidConfig.additionalPatterns) {
@@ -42,7 +50,7 @@ export class UuidDetector implements IValueDetector {
     }
   }
 
-  detect(value: unknown): DetectionResult | null {
+  detect(value: unknown, _keyPath: readonly (string | number)[]): DetectionResult | null {
     if (!this.enabled) return null;
     if (typeof value !== "string") return null;
 
