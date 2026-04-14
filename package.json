@@ -5,6 +5,14 @@
   "version": "0.1.0",
   "publisher": "anirudh-kumar",
   "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Anirudh-S-Kumar/jsonhydrate.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Anirudh-S-Kumar/jsonhydrate/issues"
+  },
+  "homepage": "https://github.com/Anirudh-S-Kumar/jsonhydrate#readme",
   "engines": {
     "vscode": "^1.86.0"
   },

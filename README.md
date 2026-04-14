@@ -1,56 +1,60 @@
-# Json Hydrate
+<div align="center">
+  <img src="assets/icon.png" width="96" />
+  <h1>Json Hydrate</h1>
+  <p>JSON visualizer for VS Code providing recursive decoding and type detection.</p>
 
-A lightning-fast, interactive visualizer for JSON files right inside VS Code. Stop squinting at raw brackets and start navigating your data with a collapsible tree UI, smart value detection, and custom coloring.
+  [![Version](https://img.shields.io/visual-studio-marketplace/v/anirudh-kumar.json-hydrate?style=flat-square)](https://marketplace.visualstudio.com/items?itemName=anirudh-kumar.json-hydrate)
+  [![License](https://img.shields.io/github/license/Anirudh-S-Kumar/jsonhydrate?style=flat-square)](LICENSE)
+</div>
 
-## Why use this?
+<hr />
 
-Raw JSON gets unreadable quickly. We built this extension to fix that by automatically detecting, highlighting, and visualizing common data patterns directly in your editor:
+Json Hydrate is an interactive JSON visualizer for VS Code providing recursive decoding, type detection, and custom highlighting.
 
-- **Interactive Trees**: Expand and collapse huge JSON structures instantly without lag.
-- **Smart Datetime Parsing**: Hover over any timestamp (Unix epochs, ISO strings) to see Local, UTC, and Relative time conversions instantly.
-  ![Datetime Parsing](assets/gifs/datetime.gif)
-- **Nested JSON & Decoding**: Automatically decode nested JSON strings and Base64 content directly in the tree.
-  ![JSON and Base64 Decoding](assets/gifs/json_decode.gif)
-- **Decompression**: Seamlessly decompress Gzip/Zlib data for easy inspection.
-  ![Gzip Decompression](assets/gifs/gzip.gif)
-- **Markdown Rendering**: JSON containing markdown? It's automatically rendered inline for readability.
-  ![Markdown Rendering](assets/gifs/markdown.gif)
+## Features
 
-## Additional Features
+### Type Detection and Highlighting
 
-### Image Previews
+- **Datetime Parsing**: Automatically identifies Unix epochs and ISO strings. Hovering over values reveals Local, UTC, and Relative time conversions.
+  <br/><img src="assets/gifs/datetime.gif" width="600" alt="Datetime Parsing" />
 
-![Image Preview Feature](assets/gifs/image_preview.gif)
-_Automatically preview images from URLs or Base64 data._
+- **UUID Highlighting**: Automatically identifies standard UUID formats for distinctive coloring.
 
-### Base64 Support
+### Data Decoding
 
-![Base64 Decoding](assets/gifs/b64.gif)
-_Instantly decode Base64 strings to view their underlying content in place._
+- **Recursive JSON and Base64**: Identifies and expands nested JSON strings or Base64-encoded content within the tree structure.
+  <br/><img src="assets/gifs/json_decode.gif" width="600" alt="JSON and Base64 Decoding" />
 
-### JWT Visualizer
+- **Gzip Decompression**: In-place decompression for Gzip and Zlib data.
+  <br/><img src="assets/gifs/gzip.gif" width="600" alt="Gzip Decompression" />
 
-![JWT Highlighting](assets/gifs/jwt.gif)
-_Define custom rules to highlight and identify JWT tokens or other patterns._
+### Content Rendering
 
-## Quick Start
+- **Markdown Rendering**: Renders Markdown-formatted strings as styled blocks within the viewer.
+  <br/><img src="assets/gifs/markdown.gif" width="600" alt="Markdown Rendering" />
 
-1. Open any `.json` file in VS Code.
-2. Click the tiny **Tree Icon** in the top-right editor action bar.
-3. _Alternatively_: Highlight any snippet of JSON text, right-click, and select **"Open Selection in Json Hydrate"**.
-   - **Tip**: You can select partial snippets like `"key": "value"`! The viewer will automatically wrap them in curly braces to make them valid for visualization.
+- **Image Previews**: Visualizes images from URLs or Base64 data strings.
+  <br/><img src="assets/gifs/image_preview.gif" width="600" alt="Image Previews" />
 
-## Customization
+- **Token Highlighting**: Define custom regex rules to highlight JWT tokens, AWS ARNs, or internal ID formats.
+  <br/><img src="assets/gifs/jwt.gif" width="600" alt="JWT Highlighting" />
 
-The viewer is highly customizable via your VS Code `settings.json` (under `jsonhydrate.*`):
+## Usage
 
-| Setting                     | What it does                                   | Default   |
-| --------------------------- | ---------------------------------------------- | --------- |
-| `jsonhydrate.uuid.enabled`     | Turns on UUID tracking.                        | `true`    |
-| `jsonhydrate.uuid.color`       | Highlight color for UUIDs.                     | `#c792ea` |
-| `jsonhydrate.datetime.enabled` | Turns on Datetime detection / hover tooltips.  | `true`    |
-| `jsonhydrate.datetime.color`   | Highlight color for timestamps.                | `#ffcb6b` |
-| `jsonhydrate.customRules`      | Supply your own Regex pattern matching arrays! | `[]`      |
+1. Open any JSON or JSONC file.
+2. Select the **Hydrate** icon in the editor title bar (top right).
+3. To visualize specific snippets, right-click a selection and choose **Open Selection in Json Hydrate**. Partial snippets are supported via automatic heuristic wrapping.
+
+## Configuration
+
+Customization is managed via the `jsonhydrate.*` prefix in `settings.json`.
+
+| Key                               | Description                                       | Default |
+| :-------------------------------- | :------------------------------------------------ | :------ |
+| `jsonhydrate.uuid.enabled`        | Enable UUID highlighting.                         | `true`  |
+| `jsonhydrate.datetime.enabled`    | Enable timestamp detection and tooltips.          | `true`  |
+| `jsonhydrate.markdown.autoRender` | Automatically render detected Markdown.           | `false` |
+| `jsonhydrate.customRules`         | Regex rules for custom highlighting and tooltips. | `[]`    |
 
 ## License
 
