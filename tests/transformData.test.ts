@@ -111,7 +111,7 @@ describe("transformData", () => {
       path: "content",
       type: "multiline",
       raw: "# Quick Header",
-      autoRender: true,
+      autoRender: false,
     });
   });
 });
