@@ -59,7 +59,7 @@ export class CustomRegexDetector implements IValueDetector {
       type: this.name,
       raw: strValue,
       color: this.color,
-      className: "jsontree-custom",
+      className: "jsonhydrate-custom",
       tooltip,
     };
   }

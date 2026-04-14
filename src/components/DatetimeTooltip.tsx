@@ -59,15 +59,15 @@ const TooltipRow: React.FC<{
   );
 
   return (
-    <div className="jsontree-tooltip-row" onClick={handleCopy} title={`Click to copy: ${value}`}>
-      <span className="jsontree-tooltip-label">{label}</span>
-      <span className="jsontree-tooltip-value">
+    <div className="jsonhydrate-tooltip-row" onClick={handleCopy} title={`Click to copy: ${value}`}>
+      <span className="jsonhydrate-tooltip-label">{label}</span>
+      <span className="jsonhydrate-tooltip-value">
         {copied ? (
           <span style={{ color: "#4ec9b0", fontWeight: 600 }}>✓ Copied</span>
         ) : (
           <>
             {value}
-            <span className="jsontree-tooltip-copy-icon">
+            <span className="jsonhydrate-tooltip-copy-icon">
               <CopyRowIcon />
             </span>
           </>
@@ -154,7 +154,7 @@ export const DatetimeTooltip: React.FC<DatetimeTooltipProps> = ({ value, color, 
     <>
       <span
         ref={triggerRef}
-        className="jsontree-datetime"
+        className="jsonhydrate-datetime"
         style={{ color }}
         onMouseEnter={showTooltip}
         onMouseLeave={scheduleHide}
@@ -163,13 +163,13 @@ export const DatetimeTooltip: React.FC<DatetimeTooltipProps> = ({ value, color, 
       </span>
       <div
         ref={tooltipRef}
-        className={`jsontree-tooltip ${visible ? "visible" : ""}`}
+        className={`jsonhydrate-tooltip ${visible ? "visible" : ""}`}
         style={{ top: position.top, left: position.left }}
         onMouseEnter={cancelHide}
         onMouseLeave={scheduleHide}
       >
-        <div className="jsontree-tooltip-card">
-          <div className="jsontree-tooltip-header">📅 Datetime</div>
+        <div className="jsonhydrate-tooltip-card">
+          <div className="jsonhydrate-tooltip-header">📅 Datetime</div>
           {rows.map((row) => (
             <TooltipRow key={row.label} label={row.label} value={row.value} />
           ))}

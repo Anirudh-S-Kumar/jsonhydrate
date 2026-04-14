@@ -1,4 +1,4 @@
-# Contributing to JSON Tree Viewer
+# Contributing to Json Hydrate
 
 First of all, thanks for taking the time to contribute! We appreciate all PRs, whether they are bug fixes, new features, or documentation improvements.
 

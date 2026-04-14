@@ -31,7 +31,7 @@ describe("ItemSummary", () => {
     const data = { hello: "world" };
     const { container, getByText } = render(<ItemSummary type="Object" data={data} />);
 
-    const button = container.querySelector(".jsontree-copy-btn");
+    const button = container.querySelector(".jsonhydrate-copy-btn");
     expect(button).toBeInTheDocument();
 
     fireEvent.click(button!);

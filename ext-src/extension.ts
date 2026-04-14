@@ -3,13 +3,13 @@ import * as vscode from "vscode";
 import { createWebviewPanel } from "./webview.js";
 
 function getPanelTitle(document?: vscode.TextDocument) {
-  if (!document) return "JSON Tree";
+  if (!document) return "Json Hydrate";
   const fileName = path.basename(document.fileName);
-  return fileName ? `🌳 ${fileName}` : "JSON Tree";
+  return fileName ? `🌳 ${fileName}` : "Json Hydrate";
 }
 
 function getSettings(): Record<string, unknown> {
-  const config = vscode.workspace.getConfiguration("jsontree");
+  const config = vscode.workspace.getConfiguration("jsonhydrate");
   return {
     uuid: {
       enabled: config.get<boolean>("uuid.enabled", true),
@@ -152,8 +152,8 @@ function navigateToJsonPath(editor: vscode.TextEditor | undefined, jsonPath: (st
 
 export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(
-    vscode.commands.registerCommand("jsontree.open", () => createWebviewForActiveEditor(context)),
-    vscode.commands.registerCommand("jsontree.openSelected", () =>
+    vscode.commands.registerCommand("jsonhydrate.open", () => createWebviewForActiveEditor(context)),
+    vscode.commands.registerCommand("jsonhydrate.openSelected", () =>
       createWebviewForSelectedText(context),
     ),
   );
@@ -193,7 +193,7 @@ function createWebviewForSelectedText(context: vscode.ExtensionContext) {
   });
 
   const onConfigChange = vscode.workspace.onDidChangeConfiguration((e) => {
-    if (e.affectsConfiguration("jsontree")) {
+    if (e.affectsConfiguration("jsonhydrate")) {
       panel.webview.postMessage({ type: "settings", settings: getSettings() });
     }
   });
@@ -233,7 +233,7 @@ function createWebviewForActiveEditor(context: vscode.ExtensionContext) {
   });
 
   const onConfigChange = vscode.workspace.onDidChangeConfiguration((e) => {
-    if (e.affectsConfiguration("jsontree")) {
+    if (e.affectsConfiguration("jsonhydrate")) {
       panel.webview.postMessage({ type: "settings", settings: getSettings() });
     }
   });

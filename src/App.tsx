@@ -104,24 +104,24 @@ const App: React.FC = () => {
 
   if (parseError) {
     return (
-      <div className="jsontree-error">
-        <div className="jsontree-error-icon">⚠️</div>
-        <div className="jsontree-error-title">Invalid JSON</div>
-        <div className="jsontree-error-message">{parseError}</div>
+      <div className="jsonhydrate-error">
+        <div className="jsonhydrate-error-icon">⚠️</div>
+        <div className="jsonhydrate-error-title">Invalid JSON</div>
+        <div className="jsonhydrate-error-message">{parseError}</div>
       </div>
     );
   }
 
   if (parsedJson === null) {
     return (
-      <div className="jsontree-empty">
-        <div className="jsontree-empty-message">No data to display</div>
+      <div className="jsonhydrate-empty">
+        <div className="jsonhydrate-empty-message">No data to display</div>
       </div>
     );
   }
 
   return (
-    <div className={`jsontree-root jsontree-${theme}`}>
+    <div className={`jsonhydrate-root jsonhydrate-${theme}`}>
       <TreeViewer
         data={parsedJson}
         theme={theme}

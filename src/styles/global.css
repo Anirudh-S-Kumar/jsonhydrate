@@ -29,7 +29,7 @@ body {
 }
 
 /* ===== Root Container ===== */
-.jsontree-root {
+.jsonhydrate-root {
   width: 100%;
   height: 100%;
   overflow: auto;
@@ -37,51 +37,51 @@ body {
   background: transparent;
 }
 
-.jsontree-root > ul {
+.jsonhydrate-root > ul {
   margin-top: 0 !important;
   padding: 0 !important;
   background: transparent !important;
 }
 
 /* Override react-json-tree background to transparent */
-.jsontree-root ul {
+.jsonhydrate-root ul {
   background: transparent !important;
 }
 
-.jsontree-dark {
+.jsonhydrate-dark {
   color: #d4d4d4;
 }
 
-.jsontree-light {
+.jsonhydrate-light {
   color: #333333;
 }
 
 /* ===== Scrollbar ===== */
-.jsontree-root::-webkit-scrollbar {
+.jsonhydrate-root::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
-.jsontree-dark::-webkit-scrollbar-track {
+.jsonhydrate-dark::-webkit-scrollbar-track {
   background: transparent;
 }
 
-.jsontree-dark::-webkit-scrollbar-thumb {
+.jsonhydrate-dark::-webkit-scrollbar-thumb {
   background: #424242;
   border-radius: 4px;
 }
 
-.jsontree-light::-webkit-scrollbar-track {
+.jsonhydrate-light::-webkit-scrollbar-track {
   background: transparent;
 }
 
-.jsontree-light::-webkit-scrollbar-thumb {
+.jsonhydrate-light::-webkit-scrollbar-thumb {
   background: #c1c1c1;
   border-radius: 4px;
 }
 
 /* ===== Error State ===== */
-.jsontree-error {
+.jsonhydrate-error {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -92,17 +92,17 @@ body {
   text-align: center;
 }
 
-.jsontree-error-icon {
+.jsonhydrate-error-icon {
   font-size: 36px;
 }
 
-.jsontree-error-title {
+.jsonhydrate-error-title {
   font-size: 16px;
   font-weight: 600;
   color: #f85c50;
 }
 
-.jsontree-error-message {
+.jsonhydrate-error-message {
   font-size: 12px;
   color: #888;
   max-width: 400px;
@@ -110,7 +110,7 @@ body {
 }
 
 /* ===== Empty State ===== */
-.jsontree-empty {
+.jsonhydrate-empty {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -120,13 +120,13 @@ body {
 }
 
 /* ===== Copyable Value Wrapper ===== */
-.jsontree-value-wrapper {
+.jsonhydrate-value-wrapper {
   position: relative;
   display: inline;
   cursor: default;
 }
 
-.jsontree-copy-btn {
+.jsonhydrate-copy-btn {
   display: inline-flex;
   align-items: center;
   margin-left: 4px;
@@ -141,21 +141,21 @@ body {
   font: inherit;
 }
 
-.jsontree-value-wrapper:hover .jsontree-copy-btn {
+.jsonhydrate-value-wrapper:hover .jsonhydrate-copy-btn {
   opacity: 0.7;
 }
 
-.jsontree-copy-btn:hover {
+.jsonhydrate-copy-btn:hover {
   opacity: 1 !important;
   color: var(--vscode-editor-foreground, #d4d4d4);
 }
 
-.jsontree-copy-btn svg {
+.jsonhydrate-copy-btn svg {
   width: 11px;
   height: 11px;
 }
 
-.jsontree-copied-toast {
+.jsonhydrate-copied-toast {
   position: absolute;
   top: -22px;
   left: 50%;
@@ -167,11 +167,11 @@ body {
   font-size: 10px;
   white-space: nowrap;
   pointer-events: none;
-  animation: jsontree-fadeout 1.2s ease forwards;
+  animation: jsonhydrate-fadeout 1.2s ease forwards;
   z-index: 100;
 }
 
-@keyframes jsontree-fadeout {
+@keyframes jsonhydrate-fadeout {
   0% {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
@@ -186,28 +186,28 @@ body {
 }
 
 /* ===== UUID Badge ===== */
-.jsontree-uuid {
+.jsonhydrate-uuid {
   cursor: pointer;
   position: relative;
   transition: filter 0.15s ease;
 }
 
-.jsontree-uuid:hover {
+.jsonhydrate-uuid:hover {
   filter: brightness(1.3);
 }
 
 /* ===== Datetime Tooltip ===== */
-.jsontree-datetime {
+.jsonhydrate-datetime {
   cursor: help;
   position: relative;
   border-bottom: 1px dotted currentColor;
 }
 
-.jsontree-datetime:hover {
+.jsonhydrate-datetime:hover {
   filter: brightness(1.2);
 }
 
-.jsontree-tooltip {
+.jsonhydrate-tooltip {
   position: fixed;
   z-index: 9999;
   pointer-events: none;
@@ -218,13 +218,13 @@ body {
     transform 0.15s ease;
 }
 
-.jsontree-tooltip.visible {
+.jsonhydrate-tooltip.visible {
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
 }
 
-.jsontree-tooltip-card {
+.jsonhydrate-tooltip-card {
   background: var(--vscode-editorHoverWidget-background, #2b2b2b);
   border: 1px solid var(--vscode-editorHoverWidget-border, #444);
   border-radius: 6px;
@@ -235,7 +235,7 @@ body {
   max-width: 400px;
 }
 
-.jsontree-tooltip-header {
+.jsonhydrate-tooltip-header {
   font-size: 10px;
   font-weight: 600;
   color: #888;
@@ -246,7 +246,7 @@ body {
   border-bottom: 1px solid rgba(128, 128, 128, 0.2);
 }
 
-.jsontree-tooltip-row {
+.jsonhydrate-tooltip-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -257,15 +257,15 @@ body {
   transition: background 0.1s ease;
 }
 
-.jsontree-tooltip-row:hover {
+.jsonhydrate-tooltip-row:hover {
   background: rgba(128, 128, 128, 0.15);
 }
 
-.jsontree-tooltip-row + .jsontree-tooltip-row {
+.jsonhydrate-tooltip-row + .jsonhydrate-tooltip-row {
   border-top: 1px solid rgba(128, 128, 128, 0.1);
 }
 
-.jsontree-tooltip-label {
+.jsonhydrate-tooltip-label {
   color: #888;
   font-weight: 600;
   font-size: 10px;
@@ -274,7 +274,7 @@ body {
   flex-shrink: 0;
 }
 
-.jsontree-tooltip-value {
+.jsonhydrate-tooltip-value {
   color: var(--vscode-editor-foreground, #e0e0e0);
   text-align: right;
   user-select: all;
@@ -284,25 +284,25 @@ body {
   gap: 8px;
 }
 
-.jsontree-tooltip-copy-icon {
+.jsonhydrate-tooltip-copy-icon {
   opacity: 0;
   transition: opacity 0.1s ease;
   color: #888;
   flex-shrink: 0;
 }
 
-.jsontree-tooltip-row:hover .jsontree-tooltip-copy-icon {
+.jsonhydrate-tooltip-row:hover .jsonhydrate-tooltip-copy-icon {
   opacity: 1;
 }
 
 /* ===== Color Preview ===== */
-.jsontree-color-preview {
+.jsonhydrate-color-preview {
   display: inline-flex;
   align-items: center;
   gap: 8px;
 }
 
-.jsontree-color-swatch {
+.jsonhydrate-color-swatch {
   display: inline-block;
   width: 12px;
   height: 12px;
@@ -314,17 +314,17 @@ body {
 }
 
 /* ===== Image Preview ===== */
-.jsontree-image-trigger {
+.jsonhydrate-image-trigger {
   cursor: pointer;
   border-bottom: 1px dashed currentColor;
   position: relative;
 }
 
-.jsontree-image-trigger:hover {
+.jsonhydrate-image-trigger:hover {
   filter: brightness(1.2);
 }
 
-.jsontree-image-popup {
+.jsonhydrate-image-popup {
   position: fixed;
   z-index: 9999;
   pointer-events: none;
@@ -335,12 +335,12 @@ body {
     transform 0.2s ease;
 }
 
-.jsontree-image-popup.visible {
+.jsonhydrate-image-popup.visible {
   opacity: 1;
   transform: translateY(0);
 }
 
-.jsontree-image-popup img {
+.jsonhydrate-image-popup img {
   max-width: 300px;
   max-height: 200px;
   border-radius: 6px;
@@ -351,17 +351,17 @@ body {
 }
 
 /* ===== Custom Rule Highlights ===== */
-.jsontree-custom {
+.jsonhydrate-custom {
   border-bottom: 1px dashed currentColor;
   cursor: help;
 }
 
-.jsontree-custom:hover {
+.jsonhydrate-custom:hover {
   filter: brightness(1.2);
 }
 
 /* ===== Toolbar ===== */
-.jsontree-toolbar {
+.jsonhydrate-toolbar {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -370,7 +370,7 @@ body {
   margin-bottom: 8px;
 }
 
-.jsontree-toolbar-btn {
+.jsonhydrate-toolbar-btn {
   background: var(--vscode-button-secondaryBackground, #333);
   color: var(--vscode-button-secondaryForeground, #d4d4d4);
   border: 1px solid rgba(128, 128, 128, 0.3);
@@ -382,11 +382,11 @@ body {
   transition: background 0.15s ease;
 }
 
-.jsontree-toolbar-btn:hover {
+.jsonhydrate-toolbar-btn:hover {
   background: var(--vscode-button-secondaryHoverBackground, #444);
 }
 
-.jsontree-toolbar-separator {
+.jsonhydrate-toolbar-separator {
   width: 1px;
   height: 18px;
   background: rgba(128, 128, 128, 0.3);
@@ -394,25 +394,25 @@ body {
 }
 
 /* ===== Label Styles ===== */
-.jsontree-label {
+.jsonhydrate-label {
   transition: filter 0.15s ease;
   cursor: pointer;
 }
 
-.jsontree-label:hover {
+.jsonhydrate-label:hover {
   filter: brightness(1.4);
   text-decoration: underline;
 }
 
 /* ===== Item Summary ===== */
-.jsontree-item-summary {
+.jsonhydrate-item-summary {
   color: #888;
   font-style: italic;
   font-size: 12px;
 }
 
 /* ===== Decode Badge ===== */
-.jsontree-decode-badge {
+.jsonhydrate-decode-badge {
   display: inline-flex;
   align-items: center;
   gap: 2px;
@@ -431,31 +431,31 @@ body {
   line-height: 1.6;
 }
 
-.jsontree-decode-badge:hover {
+.jsonhydrate-decode-badge:hover {
   background: var(--vscode-button-secondaryHoverBackground, #444);
   color: var(--vscode-editor-foreground, #d4d4d4);
 }
 
-.jsontree-decode-badge.active {
+.jsonhydrate-decode-badge.active {
   background: rgba(76, 175, 80, 0.15);
   border-color: rgba(76, 175, 80, 0.4);
   color: #81c784;
 }
 
-.jsontree-decode-badge.active:hover {
+.jsonhydrate-decode-badge.active:hover {
   background: rgba(76, 175, 80, 0.25);
 }
 
-.jsontree-toolbar-btn-decode {
+.jsonhydrate-toolbar-btn-decode {
   background: rgba(76, 175, 80, 0.12);
   border-color: rgba(76, 175, 80, 0.3);
 }
 
-.jsontree-toolbar-btn-decode:hover {
+.jsonhydrate-toolbar-btn-decode:hover {
   background: rgba(76, 175, 80, 0.22);
 }
 
-.jsontree-markdown-wrapper {
+.jsonhydrate-markdown-wrapper {
   display: block;
   position: relative;
   margin: 4px 0 4px 8px;
@@ -464,11 +464,11 @@ body {
   transition: border-color 0.2s ease;
 }
 
-.jsontree-markdown-wrapper:hover {
+.jsonhydrate-markdown-wrapper:hover {
   border-left-color: rgba(128, 128, 128, 0.3);
 }
 
-.jsontree-markdown-copy {
+.jsonhydrate-markdown-copy {
   position: absolute;
   top: 4px;
   right: 4px;
@@ -482,21 +482,21 @@ body {
   line-height: 0;
 }
 
-.jsontree-markdown-copy svg {
+.jsonhydrate-markdown-copy svg {
   width: 11px;
   height: 11px;
 }
 
-.jsontree-markdown-wrapper:hover .jsontree-markdown-copy {
+.jsonhydrate-markdown-wrapper:hover .jsonhydrate-markdown-copy {
   opacity: 0.7;
 }
 
-.jsontree-markdown-copy:hover {
+.jsonhydrate-markdown-copy:hover {
   opacity: 1 !important;
   color: var(--vscode-editor-foreground, #d4d4d4);
 }
 
-.jsontree-markdown-content {
+.jsonhydrate-markdown-content {
   display: block;
   padding: 0;
   color: var(--vscode-editor-foreground, #d4d4d4);
@@ -505,49 +505,49 @@ body {
   font-size: 12px;
 }
 
-.jsontree-markdown-content p {
+.jsonhydrate-markdown-content p {
   margin: 0 0 10px 0;
 }
 
-.jsontree-markdown-content p:last-child {
+.jsonhydrate-markdown-content p:last-child {
   margin-bottom: 0;
 }
 
-.jsontree-markdown-content h1,
-.jsontree-markdown-content h2,
-.jsontree-markdown-content h3 {
+.jsonhydrate-markdown-content h1,
+.jsonhydrate-markdown-content h2,
+.jsonhydrate-markdown-content h3 {
   margin: 16px 0 8px 0;
   color: var(--vscode-symbolIcon-propertyForeground, #dcdcaa);
 }
 
-.jsontree-markdown-content h1 {
+.jsonhydrate-markdown-content h1 {
   font-size: 1.3em;
 }
-.jsontree-markdown-content h2 {
+.jsonhydrate-markdown-content h2 {
   font-size: 1.15em;
 }
-.jsontree-markdown-content h3 {
+.jsonhydrate-markdown-content h3 {
   font-size: 1.05em;
 }
 
-.jsontree-markdown-content h1:first-child,
-.jsontree-markdown-content h2:first-child,
-.jsontree-markdown-content h3:first-child,
-.jsontree-markdown-content p:first-child {
+.jsonhydrate-markdown-content h1:first-child,
+.jsonhydrate-markdown-content h2:first-child,
+.jsonhydrate-markdown-content h3:first-child,
+.jsonhydrate-markdown-content p:first-child {
   margin-top: 0;
 }
 
-.jsontree-markdown-content ul,
-.jsontree-markdown-content ol {
+.jsonhydrate-markdown-content ul,
+.jsonhydrate-markdown-content ol {
   padding-left: 18px;
   margin-bottom: 10px;
 }
 
-.jsontree-markdown-content li {
+.jsonhydrate-markdown-content li {
   margin-bottom: 3px;
 }
 
-.jsontree-markdown-content code {
+.jsonhydrate-markdown-content code {
   font-family: var(--vscode-editor-font-family, monospace);
   background: rgba(128, 128, 128, 0.1);
   padding: 1px 4px;
@@ -555,19 +555,19 @@ body {
   font-size: 0.9em;
 }
 
-.jsontree-markdown-content blockquote {
+.jsonhydrate-markdown-content blockquote {
   margin: 0 0 10px 0;
   padding-left: 10px;
   border-left: 3px solid rgba(128, 128, 128, 0.3);
   color: #888;
 }
 
-.jsontree-markdown-content hr {
+.jsonhydrate-markdown-content hr {
   border: 0;
   border-top: 1px solid rgba(128, 128, 128, 0.2);
   margin: 14px 0;
 }
 
-.jsontree-markdown-content strong {
+.jsonhydrate-markdown-content strong {
   color: var(--vscode-editor-foreground, #e0e0e0);
 }

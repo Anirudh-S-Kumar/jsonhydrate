@@ -153,7 +153,7 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({ data, theme, detectors, 
 
           const badgeButton = decodable && (
             <button
-              className={`jsontree-decode-badge${isRendered ? " active" : ""}`}
+              className={`jsonhydrate-decode-badge${isRendered ? " active" : ""}`}
               onClick={(e) => {
                 e.stopPropagation();
                 toggleDecode(pathStr);
@@ -204,7 +204,7 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({ data, theme, detectors, 
                 decodedPaths.has(pathStr) &&
                 (nodeType === "Object" || nodeType === "Array") && (
                   <button
-                    className="jsontree-decode-badge active"
+                    className="jsonhydrate-decode-badge active"
                     onClick={(e) => {
                       e.stopPropagation();
                       toggleDecode(pathStr);

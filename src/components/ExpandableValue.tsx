@@ -29,22 +29,22 @@ export const ExpandableValue: React.FC<ExpandableValueProps> = ({
   }, []);
 
   return (
-    <span className="jsontree-expandable">
+    <span className="jsonhydrate-expandable">
       {expanded ? (
-        <span className="jsontree-expandable-content">
+        <span className="jsonhydrate-expandable-content">
           <button
-            className="jsontree-expandable-toggle"
+            className="jsonhydrate-expandable-toggle"
             onClick={toggle}
             title={`Hide decoded ${label}`}
           >
             {icon} ▲ Hide {label}
           </button>
-          <div className="jsontree-expandable-body">{children}</div>
+          <div className="jsonhydrate-expandable-body">{children}</div>
         </span>
       ) : (
-        <span className="jsontree-expandable-collapsed">
+        <span className="jsonhydrate-expandable-collapsed">
           <span style={{ color }}>{rawDisplay}</span>
-          <button className="jsontree-expandable-toggle" onClick={toggle} title={`Decode ${label}`}>
+          <button className="jsonhydrate-expandable-toggle" onClick={toggle} title={`Decode ${label}`}>
             {icon} {label}
           </button>
         </span>

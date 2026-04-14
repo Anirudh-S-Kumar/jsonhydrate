@@ -8,7 +8,7 @@ interface UuidBadgeProps {
 
 export const UuidBadge: React.FC<UuidBadgeProps> = ({ value, color, tooltip }) => {
   return (
-    <span className="jsontree-uuid" style={{ color }} title={tooltip}>
+    <span className="jsonhydrate-uuid" style={{ color }} title={tooltip}>
       &quot;{value}&quot;
     </span>
   );

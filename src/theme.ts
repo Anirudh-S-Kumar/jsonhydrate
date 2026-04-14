@@ -1,7 +1,7 @@
 // Base16 themes for react-json-tree that match VS Code dark/light
 
 export const darkTheme = {
-  scheme: "jsontree-dark",
+  scheme: "jsonhydrate-dark",
   author: "jsontree",
   base00: "transparent", // default to transparent for VS Code integration
   base01: "#1a1a1c",
@@ -22,7 +22,7 @@ export const darkTheme = {
 };
 
 export const lightTheme = {
-  scheme: "jsontree-light",
+  scheme: "jsonhydrate-light",
   author: "jsontree",
   base00: "transparent",
   base01: "#f3f3f3",

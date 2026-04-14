@@ -70,12 +70,12 @@ const CopyableValue: React.FC<{
   );
 
   return (
-    <span className="jsontree-value-wrapper">
+    <span className="jsonhydrate-value-wrapper">
       {children}
-      <button className="jsontree-copy-btn" onClick={handleCopy} title="Copy value">
+      <button className="jsonhydrate-copy-btn" onClick={handleCopy} title="Copy value">
         <CopyIcon />
       </button>
-      {copied && <span className="jsontree-copied-toast">Copied!</span>}
+      {copied && <span className="jsonhydrate-copied-toast">Copied!</span>}
     </span>
   );
 };
@@ -87,8 +87,8 @@ const ColorPreview: React.FC<{
   valueAsString: string;
 }> = ({ color, valueAsString }) => (
   <CopyableValue copyText={color}>
-    <span className="jsontree-color-preview">
-      <span className="jsontree-color-swatch" style={{ backgroundColor: color }} />
+    <span className="jsonhydrate-color-preview">
+      <span className="jsonhydrate-color-swatch" style={{ backgroundColor: color }} />
       {valueAsString}
     </span>
   </CopyableValue>
@@ -136,7 +136,7 @@ const ImagePreview: React.FC<{
     <CopyableValue copyText={url}>
       <span
         ref={triggerRef}
-        className="jsontree-image-trigger"
+        className="jsonhydrate-image-trigger"
         onMouseEnter={showPreview}
         onMouseLeave={hidePreview}
         onClick={handleClick}
@@ -146,7 +146,7 @@ const ImagePreview: React.FC<{
       </span>
       {!imgError && (
         <div
-          className={`jsontree-image-popup ${visible ? "visible" : ""}`}
+          className={`jsonhydrate-image-popup ${visible ? "visible" : ""}`}
           style={{ top: position.top, left: position.left }}
         >
           <img src={fullUrl} alt="Preview" onError={() => setImgError(true)} />
@@ -173,11 +173,11 @@ const MarkdownBlock: React.FC<{ raw: string; normalized: string }> = ({ raw, nor
   );
 
   return (
-    <div className="jsontree-markdown-wrapper">
-      <button className="jsontree-markdown-copy" onClick={handleCopy} title="Copy raw value">
+    <div className="jsonhydrate-markdown-wrapper">
+      <button className="jsonhydrate-markdown-copy" onClick={handleCopy} title="Copy raw value">
         {copied ? <span style={{ color: "#4ec9b0", fontSize: "10px" }}>✓</span> : <CopyIcon />}
       </button>
-      <div className="jsontree-markdown-content">
+      <div className="jsonhydrate-markdown-content">
         <ReactMarkdown remarkPlugins={[remarkGfm]}>{normalized}</ReactMarkdown>
       </div>
     </div>

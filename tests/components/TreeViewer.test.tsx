@@ -49,7 +49,7 @@ describe("TreeViewer", () => {
     );
 
     // Should find the badge initially
-    const badge = container.querySelector(".jsontree-decode-badge");
+    const badge = container.querySelector(".jsonhydrate-decode-badge");
     expect(badge).toBeInTheDocument();
     expect(badge?.textContent).toContain("B64");
 

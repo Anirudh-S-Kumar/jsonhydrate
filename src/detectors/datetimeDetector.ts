@@ -181,7 +181,7 @@ export class DatetimeDetector implements IValueDetector {
       type: "datetime",
       raw: String(value),
       color: this.color,
-      className: "jsontree-datetime",
+      className: "jsonhydrate-datetime",
       tooltip: buildTooltip(date),
       parsed: date,
     };

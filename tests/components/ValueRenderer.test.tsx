@@ -31,7 +31,7 @@ describe("ValueRenderer", () => {
     );
 
     // Assert that markdown wrapper logic is rendering
-    expect(container.querySelector(".jsontree-markdown-wrapper")).toBeInTheDocument();
+    expect(container.querySelector(".jsonhydrate-markdown-wrapper")).toBeInTheDocument();
 
     // Assert that H1 tag was produced
     const h1 = container.querySelector("h1");
@@ -63,7 +63,7 @@ describe("ValueRenderer", () => {
     );
 
     // Raw strings should not have markdown-wrapper
-    expect(container.querySelector(".jsontree-markdown-wrapper")).not.toBeInTheDocument();
+    expect(container.querySelector(".jsonhydrate-markdown-wrapper")).not.toBeInTheDocument();
 
     // The entire raw string text should simply be an inline span
     expect(container.querySelector("span")?.textContent).toBe(markdownStr);

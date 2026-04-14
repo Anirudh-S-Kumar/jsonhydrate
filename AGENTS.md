@@ -1,6 +1,6 @@
-# JSON Tree Viewer Extension - Agent Context
+# Json Hydrate Extension - Agent Context
 
-Welcome to the JSON Tree Viewer repository. This document serves as the architecture overview and behavioral guidelines for AI coding assistants.
+Welcome to the Json Hydrate repository. This document serves as the architecture overview and behavioral guidelines for AI coding assistants.
 
 ## 🛠️ Tech Stack & Architecture
 - **Host Extension**: Runs in VS Code's Node.js environment (`ext-src/`) using TypeScript. Bundled with esbuild to `build/extension.js`. Communicates with the webview using message passing.

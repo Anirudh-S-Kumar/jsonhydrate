@@ -33,7 +33,7 @@ export const LabelRenderer: React.FC<LabelRendererProps> = ({
   );
 
   return (
-    <span className="jsontree-label" style={style} onClick={handleClick}>
+    <span className="jsonhydrate-label" style={style} onClick={handleClick}>
       {isArrayIndex ? key : String(key)}:
     </span>
   );

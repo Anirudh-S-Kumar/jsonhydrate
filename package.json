@@ -1,6 +1,6 @@
 {
-  "name": "jsontree-viewer",
-  "displayName": "JSON Tree Viewer",
+  "name": "json-hydrate",
+  "displayName": "Json Hydrate",
   "description": "Visualize JSON files as interactive collapsible trees with UUID highlighting, datetime detection, and custom rules.",
   "version": "0.1.0",
   "publisher": "anirudh-kumar",
@@ -17,7 +17,8 @@
     "viewer",
     "visualizer",
     "uuid",
-    "datetime"
+    "datetime",
+    "hydrate"
   ],
   "icon": "assets/icon.png",
   "main": "./build/extension.js",
@@ -29,50 +30,50 @@
   "contributes": {
     "commands": [
       {
-        "command": "jsontree.open",
-        "title": "Open JSON Tree View",
-        "category": "JSON Tree",
+        "command": "jsonhydrate.open",
+        "title": "Open Json Hydrate View",
+        "category": "Json Hydrate",
         "icon": {
           "light": "./assets/icon-light.svg",
           "dark": "./assets/icon-dark.svg"
         }
       },
       {
-        "command": "jsontree.openSelected",
-        "title": "Open Selection in JSON Tree",
-        "category": "JSON Tree"
+        "command": "jsonhydrate.openSelected",
+        "title": "Open Selection in Json Hydrate",
+        "category": "Json Hydrate"
       }
     ],
     "menus": {
       "editor/title": [
         {
-          "command": "jsontree.open",
+          "command": "jsonhydrate.open",
           "when": "resourceExtname == .json || editorLangId == json || editorLangId == jsonc",
           "group": "navigation"
         }
       ],
       "editor/context": [
         {
-          "command": "jsontree.openSelected",
+          "command": "jsonhydrate.openSelected",
           "when": "editorHasSelection",
           "group": "navigation"
         }
       ]
     },
     "configuration": {
-      "title": "JSON Tree Viewer",
+      "title": "Json Hydrate",
       "properties": {
-        "jsontree.uuid.enabled": {
+        "jsonhydrate.uuid.enabled": {
           "type": "boolean",
           "default": true,
           "description": "Highlight UUID values with a distinct color."
         },
-        "jsontree.uuid.color": {
+        "jsonhydrate.uuid.color": {
           "type": "string",
           "default": "#c792ea",
           "description": "Color for UUID values."
         },
-        "jsontree.uuid.additionalPatterns": {
+        "jsonhydrate.uuid.additionalPatterns": {
           "type": "array",
           "items": {
             "type": "string"
@@ -80,17 +81,17 @@
           "default": [],
           "description": "Additional regex patterns to detect as UUIDs (e.g. custom ID formats)."
         },
-        "jsontree.datetime.enabled": {
+        "jsonhydrate.datetime.enabled": {
           "type": "boolean",
           "default": true,
           "description": "Detect and enrich datetime values with hover tooltips."
         },
-        "jsontree.datetime.color": {
+        "jsonhydrate.datetime.color": {
           "type": "string",
           "default": "#ffcb6b",
           "description": "Color for datetime values."
         },
-        "jsontree.datetime.keyHints": {
+        "jsonhydrate.datetime.keyHints": {
           "type": "array",
           "items": {
             "type": "string"
@@ -109,17 +110,17 @@
           ],
           "description": "Key name substrings that hint a numeric value is a timestamp. Used for 10/13-digit numbers."
         },
-        "jsontree.datetime.unixRangeMin": {
+        "jsonhydrate.datetime.unixRangeMin": {
           "type": "number",
           "default": 0,
           "description": "Minimum Unix timestamp (seconds) to consider valid (default: 1970-01-01)."
         },
-        "jsontree.datetime.unixRangeMax": {
+        "jsonhydrate.datetime.unixRangeMax": {
           "type": "number",
           "default": 4102444800,
           "description": "Maximum Unix timestamp (seconds) to consider valid (default: 2100-01-01)."
         },
-        "jsontree.customRules": {
+        "jsonhydrate.customRules": {
           "type": "array",
           "items": {
             "type": "object",
@@ -154,7 +155,7 @@
           "default": [],
           "markdownDescription": "Add custom value detection rules. Each rule is a regex that, when matched, highlights the value in the specified color.\n\nExample — detect AWS ARNs:\n```json\n{\n  \"name\": \"AWS ARN\",\n  \"pattern\": \"^arn:aws:[a-z0-9-]+:[a-z0-9-]*:[0-9]*:.+$\",\n  \"color\": \"#ff9e64\",\n  \"tooltip\": \"AWS Resource: $0\"\n}\n```"
         },
-        "jsontree.markdown.keyHints": {
+        "jsonhydrate.markdown.keyHints": {
           "type": "array",
           "items": {
             "type": "string"
@@ -171,77 +172,77 @@
           ],
           "description": "Key name substrings that hint a value should be rendered as markdown."
         },
-        "jsontree.markdown.autoRender": {
+        "jsonhydrate.markdown.autoRender": {
           "type": "boolean",
           "default": false,
           "description": "Automatically render values detected as Markdown blocks without manual toggling."
         },
-        "jsontree.theme.dark.background": {
+        "jsonhydrate.theme.dark.background": {
           "type": "string",
           "default": "#0a0a0c",
           "description": "Dark Theme: Background color (used in standalone mode)."
         },
-        "jsontree.theme.dark.keys": {
+        "jsonhydrate.theme.dark.keys": {
           "type": "string",
           "default": "#59b8ff",
           "description": "Dark Theme: Color for JSON keys."
         },
-        "jsontree.theme.dark.strings": {
+        "jsonhydrate.theme.dark.strings": {
           "type": "string",
           "default": "#98c379",
           "description": "Dark Theme: Color for string values."
         },
-        "jsontree.theme.dark.numbers": {
+        "jsonhydrate.theme.dark.numbers": {
           "type": "string",
           "default": "#e8c479",
           "description": "Dark Theme: Color for numeric values."
         },
-        "jsontree.theme.dark.booleans": {
+        "jsonhydrate.theme.dark.booleans": {
           "type": "string",
           "default": "#f85c50",
           "description": "Dark Theme: Color for boolean/null values."
         },
-        "jsontree.theme.dark.uuid": {
+        "jsonhydrate.theme.dark.uuid": {
           "type": "string",
           "default": "#c792ea",
           "description": "Dark Theme: Color for UUID values."
         },
-        "jsontree.theme.dark.datetime": {
+        "jsonhydrate.theme.dark.datetime": {
           "type": "string",
           "default": "#ffcb6b",
           "description": "Dark Theme: Color for datetime values."
         },
-        "jsontree.theme.light.background": {
+        "jsonhydrate.theme.light.background": {
           "type": "string",
           "default": "#ffffff",
           "description": "Light Theme: Background color (used in standalone mode)."
         },
-        "jsontree.theme.light.keys": {
+        "jsonhydrate.theme.light.keys": {
           "type": "string",
           "default": "#005cc5",
           "description": "Light Theme: Color for JSON keys."
         },
-        "jsontree.theme.light.strings": {
+        "jsonhydrate.theme.light.strings": {
           "type": "string",
           "default": "#22863a",
           "description": "Light Theme: Color for string values."
         },
-        "jsontree.theme.light.numbers": {
+        "jsonhydrate.theme.light.numbers": {
           "type": "string",
           "default": "#d73a49",
           "description": "Light Theme: Color for numeric values."
         },
-        "jsontree.theme.light.booleans": {
+        "jsonhydrate.theme.light.booleans": {
           "type": "string",
           "default": "#d73a49",
           "description": "Light Theme: Color for boolean/null values."
         },
-        "jsontree.theme.light.uuid": {
+        "jsonhydrate.theme.light.uuid": {
           "type": "string",
           "default": "#7b1fa2",
           "description": "Light Theme: Color for UUID values."
         },
-        "jsontree.theme.light.datetime": {
+        "jsonhydrate.theme.light.datetime": {
           "type": "string",
           "default": "#af8600",
           "description": "Light Theme: Color for datetime values."

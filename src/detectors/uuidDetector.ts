@@ -68,7 +68,7 @@ export class UuidDetector implements IValueDetector {
       type: "uuid",
       raw: trimmed,
       color: this.color,
-      className: "jsontree-uuid",
+      className: "jsonhydrate-uuid",
       tooltip,
     };
   }

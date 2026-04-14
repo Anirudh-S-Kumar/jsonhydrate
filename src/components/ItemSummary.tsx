@@ -37,12 +37,12 @@ export const ItemSummary: React.FC<{
   }
 
   return (
-    <span className="jsontree-item-summary jsontree-value-wrapper">
+    <span className="jsonhydrate-item-summary jsonhydrate-value-wrapper">
       {label}
-      <button className="jsontree-copy-btn" onClick={handleCopy} title="Copy as JSON">
+      <button className="jsonhydrate-copy-btn" onClick={handleCopy} title="Copy as JSON">
         <CopyIcon />
       </button>
-      {copied && <span className="jsontree-copied-toast">Copied!</span>}
+      {copied && <span className="jsonhydrate-copied-toast">Copied!</span>}
     </span>
   );
 };

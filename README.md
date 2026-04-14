@@ -1,4 +1,4 @@
-# JSON Tree Viewer
+# Json Hydrate
 
 A lightning-fast, interactive visualizer for JSON files right inside VS Code. Stop squinting at raw brackets and start navigating your data with a collapsible tree UI, smart value detection, and custom coloring.
 
@@ -37,20 +37,20 @@ _Define custom rules to highlight and identify JWT tokens or other patterns._
 
 1. Open any `.json` file in VS Code.
 2. Click the tiny **Tree Icon** in the top-right editor action bar.
-3. _Alternatively_: Highlight any snippet of JSON text, right-click, and select **"Open Selection in JSON Tree"**.
+3. _Alternatively_: Highlight any snippet of JSON text, right-click, and select **"Open Selection in Json Hydrate"**.
    - **Tip**: You can select partial snippets like `"key": "value"`! The viewer will automatically wrap them in curly braces to make them valid for visualization.
 
 ## Customization
 
-The viewer is highly customizable via your VS Code `settings.json` (under `jsontree.*`):
+The viewer is highly customizable via your VS Code `settings.json` (under `jsonhydrate.*`):
 
 | Setting                     | What it does                                   | Default   |
 | --------------------------- | ---------------------------------------------- | --------- |
-| `jsontree.uuid.enabled`     | Turns on UUID tracking.                        | `true`    |
-| `jsontree.uuid.color`       | Highlight color for UUIDs.                     | `#c792ea` |
-| `jsontree.datetime.enabled` | Turns on Datetime detection / hover tooltips.  | `true`    |
-| `jsontree.datetime.color`   | Highlight color for timestamps.                | `#ffcb6b` |
-| `jsontree.customRules`      | Supply your own Regex pattern matching arrays! | `[]`      |
+| `jsonhydrate.uuid.enabled`     | Turns on UUID tracking.                        | `true`    |
+| `jsonhydrate.uuid.color`       | Highlight color for UUIDs.                     | `#c792ea` |
+| `jsonhydrate.datetime.enabled` | Turns on Datetime detection / hover tooltips.  | `true`    |
+| `jsonhydrate.datetime.color`   | Highlight color for timestamps.                | `#ffcb6b` |
+| `jsonhydrate.customRules`      | Supply your own Regex pattern matching arrays! | `[]`      |
 
 ## License
 

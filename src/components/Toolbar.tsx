@@ -16,15 +16,15 @@ export const Toolbar: React.FC<ToolbarProps> = ({
   onUndecodeAll,
 }) => {
   return (
-    <div className="jsontree-toolbar">
-      <button className="jsontree-toolbar-btn" onClick={onExpandAll} title="Expand all nodes">
+    <div className="jsonhydrate-toolbar">
+      <button className="jsonhydrate-toolbar-btn" onClick={onExpandAll} title="Expand all nodes">
         Expand All
       </button>
-      <button className="jsontree-toolbar-btn" onClick={onCollapseAll} title="Collapse all nodes">
+      <button className="jsonhydrate-toolbar-btn" onClick={onCollapseAll} title="Collapse all nodes">
         Collapse All
       </button>
       <button
-        className="jsontree-toolbar-btn"
+        className="jsonhydrate-toolbar-btn"
         onClick={onExpandDefault}
         title="Reset to default depth"
       >
@@ -32,10 +32,10 @@ export const Toolbar: React.FC<ToolbarProps> = ({
       </button>
       {(onDecodeAll || onUndecodeAll) && (
         <>
-          <div className="jsontree-toolbar-separator" />
+          <div className="jsonhydrate-toolbar-separator" />
           {onDecodeAll && (
             <button
-              className="jsontree-toolbar-btn jsontree-toolbar-btn-decode"
+              className="jsonhydrate-toolbar-btn jsonhydrate-toolbar-btn-decode"
               onClick={onDecodeAll}
               title="Decode all JWT, Base64, and stringified JSON values"
             >
@@ -44,7 +44,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({
           )}
           {onUndecodeAll && (
             <button
-              className="jsontree-toolbar-btn"
+              className="jsonhydrate-toolbar-btn"
               onClick={onUndecodeAll}
               title="Show all raw values"
             >

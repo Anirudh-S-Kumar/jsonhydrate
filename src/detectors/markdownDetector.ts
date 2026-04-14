@@ -47,7 +47,7 @@ export class MarkdownDetector implements IValueDetector {
         type: isMarkdownCandidate ? "markdown" : "multiline_hint",
         raw: value,
         color: "",
-        className: isMarkdownCandidate ? "jsontree-markdown-candidate" : "",
+        className: isMarkdownCandidate ? "jsonhydrate-markdown-candidate" : "",
         tooltip: isMarkdownCandidate ? "Click to render as Markdown" : "Click to show multiline",
       };
     }
