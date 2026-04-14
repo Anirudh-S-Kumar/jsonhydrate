@@ -167,7 +167,7 @@ function createWebviewForSelectedText(context: vscode.ExtensionContext) {
     return;
   }
 
-  const selectedText = editor.document.getText(editor.selection);
+  const selectedText = editor.document.getText(editor.selection).trim();
   const panel = createWebviewPanel(context, getPanelTitle(editor.document));
 
   const onReceiveMessage = panel.webview.onDidReceiveMessage((e) => {

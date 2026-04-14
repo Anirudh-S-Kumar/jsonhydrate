@@ -30,12 +30,33 @@ const App: React.FC = () => {
   }, [settings, theme]);
 
   const parsedJson = useMemo(() => {
+    let sanitized = json.trim();
+
+    // Common selection artifacts: trailing commas or semicolons
+    if (sanitized.endsWith(",") || sanitized.endsWith(";")) {
+      sanitized = sanitized.slice(0, -1).trim();
+    }
+
     try {
-      const parsed = JSON.parse(json);
+      // Pass 1: Standard parse
+      const parsed = JSON.parse(sanitized);
       setParseError(null);
       return parsed;
-    } catch (e) {
-      setParseError(e instanceof Error ? e.message : "Invalid JSON");
+    } catch (firstError) {
+      try {
+        // Pass 2: Heuristic wrapping for snippets like "key": "value"
+        // Only try this if it doesn't already look like an object/array
+        if (!sanitized.startsWith("{") && !sanitized.startsWith("[")) {
+          const wrapped = `{${sanitized}}`;
+          const parsed = JSON.parse(wrapped);
+          setParseError(null);
+          return parsed;
+        }
+      } catch (secondError) {
+        // Pass 2 failed, ignore and report original error
+      }
+
+      setParseError(firstError instanceof Error ? firstError.message : "Invalid JSON");
       return null;
     }
   }, [json]);

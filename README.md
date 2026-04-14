@@ -37,7 +37,8 @@ _Define custom rules to highlight and identify JWT tokens or other patterns._
 
 1. Open any `.json` file in VS Code.
 2. Click the tiny **Tree Icon** in the top-right editor action bar.
-3. _Alternatively_: Highlight a snippet of JSON text, right-click, and select **"Open Selection in JSON Tree"**.
+3. _Alternatively_: Highlight any snippet of JSON text, right-click, and select **"Open Selection in JSON Tree"**.
+   - **Tip**: You can select partial snippets like `"key": "value"`! The viewer will automatically wrap them in curly braces to make them valid for visualization.
 
 ## Customization
 
