@@ -1,4 +1,4 @@
-name: Publish to Open VSX
+name: Release Extension
 
 on:
   push:
@@ -6,9 +6,11 @@ on:
       - 'v*'
 
 jobs:
-  publish:
+  release:
     runs-on: ubuntu-latest
     environment: prod
+    permissions:
+      contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -27,12 +29,28 @@ jobs:
 
       - name: Run tests
         run: |
-          # Ensure tests run in CI environment
           export CI=true
           npm test
+
+      - name: Package extension
+        run: npx @vscode/vsce package -o json-hydrate.vsix
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: json-hydrate.vsix
+          token: ${{ secrets.GITHUB_TOKEN }}
+          prerelease: false
+          generate_release_notes: true
+
+      - name: Publish to Visual Studio Marketplace
+        if: env.VSCE_PAT != ''
+        env:
+          VSCE_PAT: ${{ secrets.VSCE_PAT }}
+        run: npx @vscode/vsce publish -p $VSCE_PAT --packagePath json-hydrate.vsix
 
       - name: Publish to Open VSX
         if: env.OVSX_PAT != ''
         env:
           OVSX_PAT: ${{ secrets.OPEN_VSX_TOKEN }}
-        run: npx ovsx publish
+        run: npx ovsx publish json-hydrate.vsix

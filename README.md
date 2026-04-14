@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="assets/icon.png" width="96" />
+  <img src="https://raw.githubusercontent.com/Anirudh-S-Kumar/jsonhydrate/main/assets/icon.png" width="96" />
   <h1>Json Hydrate</h1>
   <p>JSON visualizer for VS Code providing recursive decoding and type detection.</p>
 
@@ -16,28 +16,28 @@ Json Hydrate is an interactive JSON visualizer for VS Code providing recursive d
 ### Type Detection and Highlighting
 
 - **Datetime Parsing**: Automatically identifies Unix epochs and ISO strings. Hovering over values reveals Local, UTC, and Relative time conversions.
-  <br/><img src="assets/gifs/datetime.gif" width="600" alt="Datetime Parsing" />
+  <br/><img src="https://raw.githubusercontent.com/Anirudh-S-Kumar/jsonhydrate/main/assets/gifs/datetime.gif" width="600" alt="Datetime Parsing" />
 
 - **UUID Highlighting**: Automatically identifies standard UUID formats for distinctive coloring.
 
 ### Data Decoding
 
 - **Recursive JSON and Base64**: Identifies and expands nested JSON strings or Base64-encoded content within the tree structure.
-  <br/><img src="assets/gifs/json_decode.gif" width="600" alt="JSON and Base64 Decoding" />
+  <br/><img src="https://raw.githubusercontent.com/Anirudh-S-Kumar/jsonhydrate/main/assets/gifs/json_decode.gif" width="600" alt="JSON and Base64 Decoding" />
 
 - **Gzip Decompression**: In-place decompression for Gzip and Zlib data.
-  <br/><img src="assets/gifs/gzip.gif" width="600" alt="Gzip Decompression" />
+  <br/><img src="https://raw.githubusercontent.com/Anirudh-S-Kumar/jsonhydrate/main/assets/gifs/gzip.gif" width="600" alt="Gzip Decompression" />
 
 ### Content Rendering
 
 - **Markdown Rendering**: Renders Markdown-formatted strings as styled blocks within the viewer.
-  <br/><img src="assets/gifs/markdown.gif" width="600" alt="Markdown Rendering" />
+  <br/><img src="https://raw.githubusercontent.com/Anirudh-S-Kumar/jsonhydrate/main/assets/gifs/markdown.gif" width="600" alt="Markdown Rendering" />
 
 - **Image Previews**: Visualizes images from URLs or Base64 data strings.
-  <br/><img src="assets/gifs/image_preview.gif" width="600" alt="Image Previews" />
+  <br/><img src="https://raw.githubusercontent.com/Anirudh-S-Kumar/jsonhydrate/main/assets/gifs/image_preview.gif" width="600" alt="Image Previews" />
 
 - **Token Highlighting**: Define custom regex rules to highlight JWT tokens, AWS ARNs, or internal ID formats.
-  <br/><img src="assets/gifs/jwt.gif" width="600" alt="JWT Highlighting" />
+  <br/><img src="https://raw.githubusercontent.com/Anirudh-S-Kumar/jsonhydrate/main/assets/gifs/jwt.gif" width="600" alt="JWT Highlighting" />
 
 ## Usage
 

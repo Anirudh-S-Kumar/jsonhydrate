@@ -2,7 +2,7 @@
   "name": "json-hydrate",
   "displayName": "Json Hydrate",
   "description": "Visualize JSON files as interactive collapsible trees with UUID highlighting, datetime detection, and custom rules.",
-  "version": "0.1.0",
+  "version": "1.0.2",
   "publisher": "anirudh-kumar",
   "license": "Apache-2.0",
   "repository": {
@@ -25,8 +25,7 @@
     "viewer",
     "visualizer",
     "uuid",
-    "datetime",
-    "hydrate"
+    "datetime"
   ],
   "icon": "assets/icon.png",
   "main": "./build/extension.js",
